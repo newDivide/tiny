@@ -20,17 +20,12 @@ class UcenterController extends Controller
             '我的关注'=>'attention',
         ),
         '客户服务'=>array(
-            '商品咨询'=>'consult',
             '商品评价'=>'review',
-            '我的消息'=>'message',
         ),
         '账户管理'=>array(
             '个人资料'=>'info',
             '收货地址'=>'address',
-            '我的优惠券'=>'voucher',
-            '账户金额'=>'account',
             '修改密码'=>'password_change',
-            '我的积分'=>'point',
         )
 
     );
