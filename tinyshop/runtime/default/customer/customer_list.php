@@ -71,8 +71,6 @@
         <th>邮箱地址</th>
         <th style="width:130px">注册时间</th>
         <th style="width:60px">状态</th>
-        <th style="width:80px">会员等级</th>
-        <th style="width:80px">账户余额</th>
 
     </tr>
     <?php $query = new Query("grade");$items = $query->find();?>
@@ -88,8 +86,7 @@
                 <li><a class="icon-pencil" href="<?php echo urldecode(Url::urlFormat("/customer/customer_edit/id/$item[id]"));?>"> 编辑</a></li>
                 <li><a class="icon-remove-2" href="javascript:confirm_action('<?php echo urldecode(Url::urlFormat("/customer/customer_del/id/$item[id]"));?>')"> 删除</a></li>
             </ul></div></div> </td>
-        <td style="width:100px"><?php echo isset($item['name'])?$item['name']:"";?></td><td style="width:100px"><?php echo isset($item['real_name'])?$item['real_name']:"";?></td><td style="width:60px"><?php echo isset($item['point'])?$item['point']:"";?></td><td style="width:130px"><?php echo isset($item['mobile'])?$item['mobile']:"";?></td><td ><?php echo isset($item['email'])?$item['email']:"";?></td><td style="width:100px"><?php echo isset($item['reg_time'])?$item['reg_time']:"";?></td><td style="width:60px"><?php echo $item['status']==0?"未激活":($item['status']==1?"正常":"锁定");?></td><td style="width:80px"><?php echo isset($grade_name[$item['group_id']])?$grade_name[$item['group_id']]:'默认会员';?></td>
-        <td style="width:80px"><?php echo isset($item['balance'])?$item['balance']:"";?></td></tr>
+        <td style="width:100px"><?php echo isset($item['name'])?$item['name']:"";?></td><td style="width:100px"><?php echo isset($item['real_name'])?$item['real_name']:"";?></td><td style="width:60px"><?php echo isset($item['point'])?$item['point']:"";?></td><td style="width:130px"><?php echo isset($item['mobile'])?$item['mobile']:"";?></td><td ><?php echo isset($item['email'])?$item['email']:"";?></td><td style="width:100px"><?php echo isset($item['reg_time'])?$item['reg_time']:"";?></td><td style="width:60px"><?php echo $item['status']==0?"未激活":($item['status']==1?"正常":"锁定");?></td></tr>
     <?php }?>
 </table>
 </form>

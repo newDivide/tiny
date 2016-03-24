@@ -49,24 +49,47 @@
 		<?php }elseif(isset($validator)){?>
 		<div class="message_warning"><?php echo isset($validator['msg'])?$validator['msg']:"";?></div>
 		<?php }?>
-		<div class="clearfix">
+		<?php echo JS::import('dialog?skin=brief');?>
+<?php echo JS::import('dialogtools');?>
+<?php echo JS::import('form');?>
+<?php echo JS::import('date');?>
+<form action="" method="post">
+<div class="tools_bar clearfix">
+    <a class="icon-checkbox-checked icon-checkbox-unchecked" href="javascript:;" onclick="tools_select('id[]',this)" title="全选" data="true"> 全选 </a>
+    <a  class="icon-remove-2" href="javascript:;"  onclick="tools_submit({action:'<?php echo urldecode(Url::urlFormat("/customer/ask_del"));?>',msg:'删除后无法恢复，你真的删除吗？'})" title="删除"> 删除</a>
+    <a class="icon-delicious" href="<?php echo urldecode(Url::urlFormat("/customer/ask_list"));?>"> 全部订单</a>
 
-<div class="mt10">
-    <h1><b>重要信息:</b></h1>
-    <table class="mt10 default">
-        <tr><th class="caption">待发货订单：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/order/order_list?condition=and--pay_status--eq--1__and--delivery_status--eq--0__and--od.status--lt--4"));?>" class="red"><?php echo isset($shipped_num)?$shipped_num:"";?>条</a></td><th class="caption">商品库存报警：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/goods/goods_list"));?>" class="red"><?php echo isset($warning_num)?$warning_num:"";?>条</a></td></tr>
-        <tr><th class="caption">待处理的提现申请：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/customer/withdraw_list?condition=and--wd.status--eq--0"));?>" class="red"><?php echo isset($withdraw_num)?$withdraw_num:"";?>条</a></td><th class="caption">待处理的退款单：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/order/doc_refund_list?condition=and--dr.pay_status--eq--0"));?>" class="red"><?php echo isset($refund_num)?$refund_num:"";?>条</a></td></tr>
-        <tr><th class="caption">商品差评：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/customer/review_list?condition=and--a.point--lt--3"));?>" class="red"><?php echo isset($review_num)?$review_num:"";?>条</a></td></tr>
-    </table>
+    <span class="fr"><a href='javascript:;' id="condition" class="icon-search" style="" > 筛选条件</a><input id="condition_input" type="hidden" name="condition" value="<?php echo isset($condition)?$condition:"";?>"></span>
 </div>
-<div class="mt10">
-    <h1><b>信息统计:</b></h1>
-    <table class="mt10 default">
-        <tr><th class="caption">会员总数：</th> <td><?php echo isset($user_num)?$user_num:"";?></td><th class="caption">商品总数：</th> <td><?php echo isset($goods_num)?$goods_num:"";?></td></tr>
-        <tr><th class="caption">订单总数：</th> <td><?php echo isset($orders_num)?$orders_num:"";?></td><th class="caption">订单汇总：</th> <td><?php foreach($orders as $key => $item){?><span><i class="icon-order-<?php echo isset($key)?$key:"";?>"></i><?php echo isset($item)?$item:0;?></span><?php }?> </td></tr>
-    </table>
+<table class="default" >
+    <tr>
+        <th style="width:30px">选择</th>
+        <th style="width:70px">操作</th>
+        <th >咨询内容</th>
+        <th style="width:140px">咨询时间</th>
+        <th style="width:60px">是否回复</th>
+        <th style="width:140px">回复时间</th>
+
+    </tr>
+    <?php $item=null; $obj = new Query("ask as a");$obj->fields = "a.*,a.id as aid";$obj->join = "left join user as u on a.user_id = u.id";$obj->where = "$where";$obj->page = "1";$obj->order = "id desc";$items = $obj->find(); foreach($items as $key => $item){?>
+        <tr><td style="width:30px"><input type="checkbox" name="id[]" value="<?php echo isset($item['aid'])?$item['aid']:"";?>"></td>
+        <td style="width:70px" class="btn_min"><div class="operat hidden"><a  class="icon-cog action" href="javascript:;"> 处理</a><div class="menu_select"><ul>
+                <li><a class="icon-pencil" href="<?php echo urldecode(Url::urlFormat("/customer/ask_edit/id/$item[aid]"));?>"> 回复</a></li>
+                <li><a class="icon-remove-2" href="javascript:confirm_action('<?php echo urldecode(Url::urlFormat("/customer/ask_del/id/$item[aid]"));?>')"> 删除</a></li>
+            </ul></div></div> </td>
+        <td ><?php echo isset($item['question'])?$item['question']:"";?></td><td style="width:140px"><?php echo isset($item['ask_time'])?$item['ask_time']:"";?></td><td style="width:60px"><?php if($item['status']==1){?><b class="green">已回复</b><?php }elseif($item['status']==0){?><span class="red">未回复</span><?php }else{?>已关闭<?php }?></td><td style="width:140px"><?php echo isset($item['reply_time'])?$item['reply_time']:"";?></td></tr>
+    <?php }?>
+</table>
+</form>
+<div class="page_nav">
+<?php echo $obj->pageBar();?>
 </div>
-</div>
+<script type="text/javascript">
+    $("#condition").on("click",function(){
+    $("body").Condition({input:"#condition_input",okVal:'高级搜索',callback:function(data){tools_submit({action:'<?php echo urldecode(Url::urlFormat("/customer/ask_list"));?>',method:'get'});},data:{'name':{name:'咨询人'},question:{name:'咨询内容'},'a.status':{name:'是否回复',values:{0:'未回复',1:'已回复'}},ask_time:{name:'注册时间'}
+    }});
+    });
+</script>
 
 	</div>
 </div>

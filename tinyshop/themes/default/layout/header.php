@@ -24,8 +24,6 @@
                     <input type='hidden' name='tiny_token_' value='<?php echo Tiny::app()->getToken("");?>'/>
                     <input  class="search-keyword" id="search-keyword" class="txt-keyword" name="keyword" value="<?php echo isset($keyword)?$keyword:"";?>" type="text">
                     <button class="btn-search ">搜索</button>
-
-                    <p id="tags-list"><?php $item=null; $query = new Query("tags");$query->order = "is_hot desc,sort desc,num desc";$query->limit = "3";$items = $query->find(); foreach($items as $key => $item){?><a href="#"><?php echo isset($item['name'])?$item['name']:"";?></a><?php }?></p>
                 </form>
             </div>
             <div class="sub-3">
@@ -61,13 +59,13 @@
             </div>
         </div>
         <!-- S 导航栏 -->
-        <div class="nav">
-            <ul class="container">
-                <li class="category-box">
+        <div class="collapse navbar-collapse nav" id="bs-example-navbar-collapse-1">
+            <ul class="navbar-nav container"> 
+                <li class="dropdown category-box">
                     <div class="link">
-                    <a href="javascript:;">全部商品分类<i class="triangle-b"></i></a>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">全部商品分类<span class="caret"></span></a>
                     </div>
-                    <ul class="category">
+                    <ul class="dropdown-menu category">
                         <?php $current_category_ids='';$parent_category='';?>
                         <?php foreach($category as $key => $categ){?>
                         <li><a href="<?php echo urldecode(Url::urlFormat("/index/category/cid/$categ[id]"));?>">
@@ -106,5 +104,4 @@
                         <li class="link"><a href="<?php if(strstr($item['link'],'http://')===false){?><?php echo urldecode(Url::urlFormat("$item[link]"));?><?php }else{?><?php echo isset($item['link'])?$item['link']:"";?><?php }?>" target="<?php if($item['open_type']==1){?>_blank<?php }else{?>_self<?php }?>"><?php echo isset($item['name'])?$item['name']:"";?></a></li>
                         <?php }?>
                     </ul>
-                </div>
-                <!-- E 导航栏 -->
+        </div><!-- /.navbar-collapse -->        

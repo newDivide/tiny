@@ -71,8 +71,6 @@
                     <input type='hidden' name='tiny_token_' value='<?php echo Tiny::app()->getToken("");?>'/>
                     <input  class="search-keyword" id="search-keyword" class="txt-keyword" name="keyword" value="<?php echo isset($keyword)?$keyword:"";?>" type="text">
                     <button class="btn-search ">搜索</button>
-
-                  
                 </form>
             </div>
             <div class="sub-3">
@@ -159,29 +157,197 @@
             <!-- E 头部区域 -->
             <!-- S 主控区域 -->
             <div id="main">
-               <div class="bg-base">
-<div class="container">
+               <?php echo JS::import('dialog?skin=brief');?>
+<?php echo JS::import('dialogtools');?>
+<?php echo JS::import('form');?>
 <!--S 产品展示-->
-<ol class="bread-crumb">
-  <li><a href="#">商城▪团购</a></li>
-  <li><a href="#">聚划算▪低价团</a></li>
-</ol>
-<ul class="product-list clearfix">
-<?php $item=null; $groupbuy = new Query("groupbuy as gb");$groupbuy->fields = "*,gb.id as id";$groupbuy->join = "left join goods as go on gb.goods_id = go.id";$groupbuy->order = "is_end , goods_num desc";$groupbuy->limit = "12";$groupbuy->page = "1";$items = $groupbuy->find(); foreach($items as $key => $item){?>
-    <li class="item">
-        <dl class="product">
-            <dt class="img"><a href="<?php echo urldecode(Url::urlFormat("/index/groupbuy/id/$item[id]"));?>"><img src="<?php echo Common::thumb($item['img'],600,360);?>" ></a></dt>
-            <dd class="title"><a href="<?php echo urldecode(Url::urlFormat("/index/groupbuy/id/$item[id]"));?>"><?php echo TString::msubstr($item['title'],0,15);?></a></dd>
-            <dd class="price"><i><?php echo isset($currency_symbol)?$currency_symbol:"";?></i><?php echo isset($item['price'])?$item['price']:"";?></dd>
-            <dd class="status"><?php if($item['is_end']==0){?><a class="btn btn-main" href="<?php echo urldecode(Url::urlFormat("/index/groupbuy/id/$item[id]"));?>">立即团购</a><?php }else{?><span class="btn btn-gray disabled">团购结束</span><?php }?></dd>
+<link type="text/css" rel="stylesheet" href="<?php echo urldecode(Url::urlFormat("#css/product.css"));?>" />
+<script type='text/javascript' src="<?php echo urldecode(Url::urlFormat("#js/jquery.enlarge.js"));?>"></script>
+
+<div class="bundling-bar clearfix">
+    <div class="container">
+        <dl class="bund-info">
+            <dt>优惠套餐：</dt>
+            <dd><div>原价：<del><?php echo isset($currency_symbol)?$currency_symbol:"";?><?php echo isset($goods_price)?$goods_price:"";?></del></div></dd>
+            <dd><span class="price-caption">套餐价：</span></dd>
+            <dd><span class="price"><b><?php echo isset($currency_symbol)?$currency_symbol:"";?><?php echo isset($bund['price'])?$bund['price']:"";?></b></span></dd>
+            <dd><span>节约：</span><span class="save-price"><b><?php echo isset($currency_symbol)?$currency_symbol:"";?><?php echo sprintf('%01.2f',$goods_price-$bund['price']);?></b></span></dd>
         </dl>
-    </li>
-    <?php }?>
-</ul>
-<div class=" mt10 page-nav"><?php echo $groupbuy->pageBar();?></div>
+    </div>
+</div>
+<div class="container">
+    <div class="clearfix mt20" style="position: relative;">
+    <div class="content " style="overflow:visible">
+            <ul class=" clearfix " style="position: relative;">
+                <?php $sets_enable=true;?>
+                <?php foreach($goods as $key => $item){?>
+                <li class="clearfix" style="position: relative;background:#fff;border-bottom:#eee 1px solid;margin-top:20px;margin-left:10px;">
+                    <div class="fl" style="height:240px;">
+                        <a href="<?php echo urldecode(Url::urlFormat("/index/product/id/$item[id]"));?>" target="_blank"><img class="big-pic" src="<?php echo Common::thumb($item['img'],220,220);?>" width=220></a>
+                    </div>
+                    <div class="product-info" style="margin-left:250px;" gid="<?php echo isset($item['id'])?$item['id']:"";?>">
+                        <ul>
+                            <li ><h1 class="f18"><?php echo isset($item['name'])?$item['name']:"";?></h1></li>
+                            <li class="product-price"><label>销售价：</label><span id="sell_price" class="price"><?php echo isset($currency_symbol)?$currency_symbol:"";?><?php echo isset($item['sell_price'])?$item['sell_price']:"";?></span></li>
+                            <?php if($item['store_nums']<=0){?><?php $sets_enable=false;?><?php }?>
+                            <li class="product-price"><label>库存：</label>(<span><?php echo isset($item['store_nums'])?$item['store_nums']:"";?></span>)</li>
+                        </ul>
+                        <?php $specs = unserialize($item['specs']);?>
+                        <?php if(!empty($specs)){?>
+
+                        <div class=" mt10 p10 spec-info" >
+                            <?php foreach($specs as $key => $spec){?>
+                            <dl class="spec-item ">
+                                <dt><?php echo isset($spec['name'])?$spec['name']:"";?>：</dt>
+                                <dd>
+                                    <ul class="spec-values" spec_id="<?php echo isset($spec['id'])?$spec['id']:"";?>" goods_id="<?php echo isset($item['id'])?$item['id']:"";?>">
+                                        <?php foreach($spec['value'] as $key => $value){?>
+                                        <li data-value="<?php echo isset($spec['id'])?$spec['id']:"";?>:<?php echo isset($value['id'])?$value['id']:"";?>"><?php if($value['img']==''){?><span><?php echo isset($value['name'])?$value['name']:"";?></span><?php }else{?><img  src="<?php echo Common::thumb($value['img'],36,36);?>" width="36" height="36"><label><?php echo isset($value['name'])?$value['name']:"";?></label><?php }?><i></i></li>
+                                        <?php }?>
+                                    </ul>
+                                </dd>
+                            </dl>
+                            <?php }?>
+                            <dl class="spec-msg" class="spec-item " style="display: none;">
+                                <dt></dt>
+                                <dd ><p class="msg"><i class="icon-alert-16"></i><span >请选择您要购买的商品规格</span></p>
+                                </dd>
+                            </dl>
+                        </div>
+                        <?php }?>
+                    </div>
+                </li>
+                <?php }?>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<div class="bundling-bar clearfix">
+    <div class="container">
+        <div class="bundling-bbar clearfix">
+            <dl class="bund-info">
+                <dt>优惠套餐：</dt>
+                <dd><div>原价：<del><?php echo isset($currency_symbol)?$currency_symbol:"";?><?php echo isset($goods_price)?$goods_price:"";?></del></div></dd>
+                <dd><span class="price-caption">套餐价：</span></dd>
+                <dd><span class="price"><b><?php echo isset($currency_symbol)?$currency_symbol:"";?><?php echo isset($bund['price'])?$bund['price']:"";?></b></span></dd>
+            </dl><?php if($sets_enable){?><a href="javascript:;" id="buy-now" class="btn btn-main fr">立即购买</a>
+            <?php }else{?>
+            <a href="javascript:;"  class="btn btn-disable fr">库存不足</a>
+            <?php }?>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var skuMap = <?php echo JSON::encode($skumap);?>;
+
+    $(".product-info").each(function(){
+        var spec = $(this);
+        $(".spec-values li",spec).each(function(){
+            $(this).on("click",function(){
+                var disabled = $(this).hasClass('disabled');
+                if(disabled) return;
+                var flage = $(this).hasClass('selected');
+
+                $(this).parent().find("li").removeClass("selected");
+                if(!flage){
+                    $(this).addClass("selected");
+                }
+                changeStatus(spec);
+                if($(".spec-values",spec).length == $(".spec-values .selected",spec).length){
+                    var sku = new Array();
+                    $(".spec-values .selected",spec).each(function(i){
+                        sku[i]= $(this).attr("data-value");
+                    })
+                    var sku_key = ";"+sku.join(";")+";";
+                    if(skuMap[sku_key]!=undefined){
+                        var sku = skuMap[sku_key];
+                    }
+                    $(".spec-msg",spec).css("display","none");
+                }
+            })
+        })
+    });
+function changeStatus(spec){
+    var specs_array = new Array();
+    $(".spec-values",spec).each(function(i){
+        var selected = $(this).find(".selected");
+        if(selected.length>0)specs_array[i]=selected.attr("data-value");
+        else specs_array[i] = "\\\d+:\\\d+";
+    });
+    $(".spec-values",spec).each(function(i){
+        var selected = $(this).find(".selected");
+        $(this).find("li").removeClass("disabled");
+        var k = i;
+        $(this).find("li").each(function(){
+
+            var temp = specs_array.slice();
+            temp[k] = $(this).attr('data-value');
+            var flage = false;
+            for(sku in skuMap){
+                var reg = new RegExp(';'+temp.join(";")+';');
+                if(reg.test(sku) && skuMap[sku]['store_nums']>0) flage = true;
+            }
+            if(!flage)$(this).addClass("disabled");
+        })
+
+    });
+}
+
+    //立即团购
+    $("#buy-now").on("click",function(){
+        var product = currentProduct();
+        var error_flag = false;
+        var ids = new Array();
+
+        for(i in product){
+
+            if(product[i]){
+                ids[i] = product[i]['id'];
+            }
+            else{
+                error_flag = true;
+                $(".spec-msg:eq("+i+")").css("display","");
+                showMsgBar('alert',"请选择您要购买的商品规格！");
+            }
+        }
+        if(!error_flag){
+            ids = ids.join('-');
+            var url = "<?php echo urldecode(Url::urlFormat("/simple/order_info/type/bundbuy/id/$id/pid/"));?>"+ids;
+            window.location.href = url;
+        }
+        return false;
+    });
+
+    //取得当前商品
+    function currentProduct(){
+        var result = new Array();
+        $(".product-info").each(function(i){
+            var spec = $(this);
+            if($(".spec-values",spec).length==0){
+                result[i] = skuMap[spec.attr("gid")];
+            }else if($(".spec-values",spec).length == $(".spec-values .selected",spec).length){
+                var sku = new Array();
+                $(".spec-values .selected",spec).each(function(i){
+                    sku[i]= $(this).attr("data-value");
+                })
+                var sku_key = ";"+sku.join(";")+";"+spec.attr("gid");
+                if(skuMap[sku_key]!=undefined){
+                    result[i] = skuMap[sku_key];
+                }else result[i] = null;
+            }
+            else result[i] = null;
+        });
+        return result;
+    }
+    //展示信息
+    function showMsgBar(type,text){
+        $(".msg").find("span").text(text);
+        $(".msg").find("i").attr("class","icon icon-"+type+"-16");
+    }
+</script>
 <!--E 产品展示-->
-</div>
-</div>
 
            </div>
            <!-- E 主控区域 -->
@@ -272,7 +438,6 @@
                             $(this).removeClass("hover");
                         });
 
-                        
                         $(".category-box").mouseenter(function(){
                             $(this).addClass("on");
                         }).mouseleave(function(){
@@ -316,7 +481,6 @@
                                 $("#cart-list").empty().append('<li><div>购物车中还没有商品，赶紧选购吧！</div></li>');
                             }
                         }
-                       
                     </script>
                 </body>
                 </html>

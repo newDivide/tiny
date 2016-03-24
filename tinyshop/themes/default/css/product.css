@@ -704,7 +704,8 @@
 
 /* line 231, ../../../themes-sass/sass/default/css/product.scss */
 .sub-right {
-  margin-left: 250px; }
+  padding: 0 20px;
+  }
 
 /* line 237, ../../../themes-sass/sass/default/css/product.scss */
 .product-list .product .product-ext {

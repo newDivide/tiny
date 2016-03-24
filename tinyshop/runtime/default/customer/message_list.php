@@ -49,24 +49,39 @@
 		<?php }elseif(isset($validator)){?>
 		<div class="message_warning"><?php echo isset($validator['msg'])?$validator['msg']:"";?></div>
 		<?php }?>
-		<div class="clearfix">
+		<?php echo JS::import('form');?>
+<?php echo JS::import('date');?>
+<?php echo JS::import('dialog?skin=brief');?>
+<?php echo JS::import('dialogtools');?>
+<form action="" method="post">
+<div class="tools_bar clearfix">
+    <a class="icon-checkbox-checked icon-checkbox-unchecked" href="javascript:;" onclick="tools_select('id[]',this)" title="全选" data="true"> 全选 </a>
+    <a  class="icon-remove-2" href="javascript:;"  onclick="tools_submit({action:'<?php echo urldecode(Url::urlFormat("/customer/message_del"));?>',msg:'删除后无法恢复，你真的删除吗？'})" title="删除"> 删除</a>
+    <a  class="icon-envelop" href="<?php echo urldecode(Url::urlFormat("/customer/message_edit"));?>" title="信息发送"> 信息发送</a>
+</div>
+<table class="default" >
+    <tr>
+        <th style="width:30px">选择</th>
+        <th style="width:70px">操作</th>
+        <th style="width:100px">标题</th>
+        <th >内容</th>
+        <th style="width:140px">时间</th>
+        
+    </tr>
+    <?php $item=null; $obj = new Query("message");$obj->page = "1 desc";$items = $obj->find(); foreach($items as $key => $item){?>
+        <tr><td style="width:30px"><input type="checkbox" name="id[]" value="<?php echo isset($item['id'])?$item['id']:"";?>"></td>
+        <td style="width:70px" class="btn_min"><div class="operat hidden"><a  class="icon-cog action" href="javascript:;"> 处理</a><div class="menu_select"><ul>
+                <li><a class="icon-remove-2" href="javascript:confirm_action('<?php echo urldecode(Url::urlFormat("/customer/message_del/id/$item[id]"));?>')"> 删除</a></li>
+            </ul></div></div> </td>
+        <td style="width:100px"><?php echo isset($item['title'])?$item['title']:"";?></td><td ><?php echo isset($item['content'])?$item['content']:"";?></td><td style="width:140px"><?php echo isset($item['time'])?$item['time']:"";?></td></tr>
+    <?php }?>
+</table>
+</form>
+<div class="page_nav">
+<?php echo $obj->pageBar();?>
+</div>
 
-<div class="mt10">
-    <h1><b>重要信息:</b></h1>
-    <table class="mt10 default">
-        <tr><th class="caption">待发货订单：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/order/order_list?condition=and--pay_status--eq--1__and--delivery_status--eq--0__and--od.status--lt--4"));?>" class="red"><?php echo isset($shipped_num)?$shipped_num:"";?>条</a></td><th class="caption">商品库存报警：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/goods/goods_list"));?>" class="red"><?php echo isset($warning_num)?$warning_num:"";?>条</a></td></tr>
-        <tr><th class="caption">待处理的提现申请：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/customer/withdraw_list?condition=and--wd.status--eq--0"));?>" class="red"><?php echo isset($withdraw_num)?$withdraw_num:"";?>条</a></td><th class="caption">待处理的退款单：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/order/doc_refund_list?condition=and--dr.pay_status--eq--0"));?>" class="red"><?php echo isset($refund_num)?$refund_num:"";?>条</a></td></tr>
-        <tr><th class="caption">商品差评：</th> <td><a href="<?php echo urldecode(Url::urlFormat("/customer/review_list?condition=and--a.point--lt--3"));?>" class="red"><?php echo isset($review_num)?$review_num:"";?>条</a></td></tr>
-    </table>
-</div>
-<div class="mt10">
-    <h1><b>信息统计:</b></h1>
-    <table class="mt10 default">
-        <tr><th class="caption">会员总数：</th> <td><?php echo isset($user_num)?$user_num:"";?></td><th class="caption">商品总数：</th> <td><?php echo isset($goods_num)?$goods_num:"";?></td></tr>
-        <tr><th class="caption">订单总数：</th> <td><?php echo isset($orders_num)?$orders_num:"";?></td><th class="caption">订单汇总：</th> <td><?php foreach($orders as $key => $item){?><span><i class="icon-order-<?php echo isset($key)?$key:"";?>"></i><?php echo isset($item)?$item:0;?></span><?php }?> </td></tr>
-    </table>
-</div>
-</div>
+
 
 	</div>
 </div>

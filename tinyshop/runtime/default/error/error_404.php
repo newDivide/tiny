@@ -71,8 +71,6 @@
                     <input type='hidden' name='tiny_token_' value='<?php echo Tiny::app()->getToken("");?>'/>
                     <input  class="search-keyword" id="search-keyword" class="txt-keyword" name="keyword" value="<?php echo isset($keyword)?$keyword:"";?>" type="text">
                     <button class="btn-search ">搜索</button>
-
-                    <p id="tags-list"><?php $item=null; $query = new Query("tags");$query->order = "is_hot desc,sort desc,num desc";$query->limit = "3";$items = $query->find(); foreach($items as $key => $item){?><a href="#"><?php echo isset($item['name'])?$item['name']:"";?></a><?php }?></p>
                 </form>
             </div>
             <div class="sub-3">
@@ -257,13 +255,6 @@
                         }).mouseleave(function() {
                             $(this).removeClass("hover");
                         });
-
-                        $("#tags-list a").each(function(){
-                            $(this).on("click",function(){
-                                $("#search-keyword").val($(this).text());
-                                $("#search-form").submit();
-                            })
-                        });
                         $(".category-box").mouseenter(function(){
                             $(this).addClass("on");
                         }).mouseleave(function(){
@@ -307,12 +298,6 @@
                                 $("#cart-list").empty().append('<li><div>购物车中还没有商品，赶紧选购吧！</div></li>');
                             }
                         }
-                        $("#tags-list a").each(function(){
-                            $(this).on("click",function(){
-                                $("#search-keyword").val($(this).text());
-                                $("#search-form").submit();
-                            })
-                        });
                     </script>
                 </body>
                 </html>

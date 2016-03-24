@@ -74,7 +74,6 @@
         <th style="width:50px">支付状态</th>
         <th style="width:50px">配送状态</th>
         <th style="width:50px">订单状态</th>
-        <th style="width: 60px">打印</th>
     </tr>
     <?php $item=null; $obj = new Query("order as od");$obj->fields = "od.*,us.name as uname,us.status as ustatus";$obj->join = "left join user as us on od.user_id = us.id";$obj->where = "$where";$obj->page = "1";$obj->order = "id desc";$items = $obj->find(); foreach($items as $key => $item){?>
         <tr><td style="width:50px"><input type="checkbox" name="id[]" value="<?php echo isset($item['id'])?$item['id']:"";?>"><i class="icon-order-<?php echo isset($item['type'])?$item['type']:"";?>"></i></td>
@@ -100,20 +99,7 @@
             <td style="width:100px"><?php echo isset($item['order_no'])?$item['order_no']:"";?></td><td style="width:70px"><?php echo isset($item['order_amount'])?$item['order_amount']:"";?></td><td style="width:70px"><?php echo isset($item['uname'])?$item['uname']:"";?></td><td style="width:70px"><?php echo isset($item['accept_name'])?$item['accept_name']:"";?></td><td style="width:80px"><?php echo isset($item['mobile'])?$item['mobile']:"";?></td><td style="width:80px"><?php echo isset($payment[$item['payment']])?$payment[$item['payment']]:"";?></td><td style="width:50px"><?php echo isset($pay_status[$item['pay_status']])?$pay_status[$item['pay_status']]:"";?></td>
         <td style="width:50px"><?php echo isset($delivery_status[$item['delivery_status']])?$delivery_status[$item['delivery_status']]:"";?></td>
         <td style="width:50px" id="status_<?php echo isset($item['id'])?$item['id']:"";?>"><?php echo isset($status[$item['status']])?$status[$item['status']]:"";?></td>
-        <td style="width:60px" class="btn_min">
-            <div class="operat hidden">
-                <a class="icon-print action bottom" href="javascript:;"> 打印</a>
-                <div class="menu_select">
-                    <ul>
-                        <li><a class="icon-print" href="<?php echo urldecode(Url::urlFormat("/order/print_order/id/$item[id]"));?>" target="order"> 订单</a></li>
-                        <li><a class="icon-print" href="<?php echo urldecode(Url::urlFormat("/order/print_product/id/$item[id]"));?>" target="product" > 购物单</a></li>
-                        <li><a class="icon-print" href="<?php echo urldecode(Url::urlFormat("/order/print_picking/id/$item[id]"));?>" target="picking"> 配送单</a></li>
-                        <li><a class="icon-print" href="<?php echo urldecode(Url::urlFormat("/order/print_express/id/$item[id]"));?>" target="express"> 快递单</a></li>
-
-                    </ul>
-                </div>
-            </div>
-        </td></tr>
+        </tr>
     <?php }?>
 </table>
 </form>

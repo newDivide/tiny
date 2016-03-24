@@ -41,8 +41,9 @@
   'other' => 
   array (
     'other_currency_symbol' => '￥',
+    'other_reg_way' => '0',
     'other_currency_unit' => '元',
-    'other_is_invoice' => '1',
+    'other_is_invoice' => NULL,
     'other_tax' => '6',
     'other_grade_days' => '365',
     'other_order_delay' => '120',

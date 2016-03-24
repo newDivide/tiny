@@ -1,5 +1,12 @@
 @charset "UTF-8";
 /* line 5, D:/soft/Koala/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+*{
+  -webkit-box-sizing: initial; 
+  -moz-box-sizing: initial;
+   box-sizing: initial; }
+   a:hover,a:active{
+    text-decoration: none;
+   }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -638,8 +645,8 @@ textarea {
   #header .head-main .search-keyword {
     border: 1px solid #c91313;
     border-right: none;
-    height: 32px;
-    line-height: 32px;
+    height: 34px;
+    line-height: 34px;
     width: 460px;
     float: left;
     margin-left: 40px;
@@ -648,7 +655,7 @@ textarea {
   /* line 172, ../../../themes-sass/sass/default/css/common.scss */
   #header .head-main .btn-search, #header .head-main .shopping {
     width: 64px;
-    height: 44px;
+    height: 42px;
     background-color: #dd2727;
     border: 1px solid #c91313;
     cursor: pointer;
@@ -686,6 +693,10 @@ textarea {
     float: left;
     height: 46px;
     line-height: 46px; }
+    #header .nav li >a{
+      height: 46px;
+      line-height: 46px;
+    }
     /* line 219, ../../../themes-sass/sass/default/css/common.scss */
     #header .nav li.category-box {
       width: 240px;
@@ -742,7 +753,7 @@ textarea {
 /* line 254, ../../../themes-sass/sass/default/css/common.scss */
 #tags-list {
   position: absolute;
-  right: 65px;
+  right: 75px;
   top: 22px; }
   /* line 258, ../../../themes-sass/sass/default/css/common.scss */
   #tags-list a {
@@ -773,7 +784,9 @@ textarea {
   height: 396px;
   display: none;
   width: 240px;
-  background-color: #e13d3d; }
+  background-color: #e13d3d;
+  border-top:#e13d3d;
+   }
   /* line 292, ../../../themes-sass/sass/default/css/common.scss */
   .category li {
     display: block;
@@ -1431,7 +1444,9 @@ i.triangle-b {
     margin-top: 20px;
     position: relative;
     border-top: none;
-    background: #fff; }
+    background: #fff; 
+    padding: 0 20px;
+  }
 
 /* line 71, ../../../themes-sass/sass/tiny-sass/mixins/_grid.scss */
 .row .col-1, .row .col-2, .row .col-3, .row .col-4, .row .col-5 {
