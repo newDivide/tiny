@@ -4,30 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="HandheldFriendly" content="True">
-    <link rel="shortcut icon" href="<?php echo urldecode(Url::urlFormat("@favicon.ico"));?>"/>
-    <link rel="bookmark" href="<?php echo urldecode(Url::urlFormat("@favicon.ico"));?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#css/common.css"));?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#css/font-awesome.min.css"));?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#js/artdialog/tiny-dialog.css"));?>">
-    <style type="text/css">
-        .swiper-container {width: 100%;}
-        .js-template{display:none !important;}
-    </style>
-    <script src="<?php echo urldecode(Url::urlFormat("#js/jquery.min.js"));?>"></script>
-    <script src="<?php echo urldecode(Url::urlFormat("#js/artdialog/dialog-plus-min.js"));?>"></script>
-    <script src="<?php echo urldecode(Url::urlFormat("#js/common.js"));?>"></script>
-    <script src="<?php echo urldecode(Url::urlFormat("#js/tinyslider.js"));?>"></script>
-    <script type="text/javascript">
-        var server_url = '<?php echo urldecode(Url::urlFormat("@"));?>__con__/__act__';
-        var Tiny = {user:{name:'<?php echo isset($user['name'])?$user['name']:'';?>',id:'<?php echo isset($user['id'])?$user['id']:0;?>',online:<?php echo isset($user['id']) && $user['id']?'true':'false';?>}};
-    </script>
-    <title><?php if(isset($seo_title) && isset($site_title) && ($seo_title == $site_title)){?><?php echo isset($seo_title)?$seo_title:"";?><?php }else{?><?php echo isset($seo_title)?$seo_title:"";?>-<?php echo isset($site_title)?$site_title:"";?><?php }?></title>
+    <?php include './themes/default/layout/import.php';?>
+    
 </head>
 
 <body>
     <!-- S 头部区域 -->
     <div id="header">
         <?php include './themes/default/layout/header.php';?>
+        
             </div>
             <!-- E 头部区域 -->
             <!-- S 主控区域 -->
@@ -65,7 +50,25 @@
     </div>
 </div>
 </div>
-     <?php include './themes/default/apply/passwordchange.php';?>
+<script type="text/javascript">
+    var form =  new Form('info-form');
+    form.setValue('is_default','<?php echo isset($is_default)?$is_default:"";?>');
+    $("#areas").Linkage({ url:"<?php echo urldecode(Url::urlFormat("/ajax/area_data"));?>",selected:[<?php echo isset($province)?$province:0;?>,<?php echo isset($city)?$city:0;?>,<?php echo isset($county)?$county:0;?>],callback:function(data){
+        var text = new Array();
+        var value = new Array();
+        for(i in data[0]){
+          if(data[0][i]!=0){
+            text.push(data[1][i]);
+            value.push(data[0][i]);
+        }
+    }
+    $("#test").val(value.join(','));
+    FireEvent(document.getElementById("test"),"change");
+}});
+    <?php if(isset($invalid)){?>
+    autoValidate.showMsg({id:$("input[name='<?php echo isset($invalid['name'])?$invalid['name']:"";?>']").get(0),error:true,msg:'<?php echo isset($invalid['msg'])?$invalid['msg']:"";?>'});
+    <?php }?>
+</script>
 
            </div>
            <!-- E 主控区域 -->
@@ -73,9 +76,11 @@
            <!-- S 底部区域 -->
            <div id="footer">
                  <?php include './themes/default/layout/footer.php';?>
+                
                     </div>
                     <!-- E 底部区域 -->
-                    <?php include './themes/default/layout/footerscript.php';?>
+                 <?php include './themes/default/layout/footerscript.php';?>
+                    
                 </body>
                 </html>
 

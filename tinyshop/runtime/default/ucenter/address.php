@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="HandheldFriendly" content="True">
-    <?php include './themes/default/layout/import.php';?>
+                 <?php include './themes/default/layout/import.php';?>
+   
 </head>
 
 <body>
     <!-- S 头部区域 -->
     <div id="header">
-         <?php include './themes/default/layout/header.php';?>
+        <?php include './themes/default/layout/header.php';?>
+        
             </div>
             <!-- E 头部区域 -->
             <!-- S 主控区域 -->
@@ -42,18 +44,33 @@
         <div class="mt10">最多可保存20个有效地址！</div>
     </div>
 </div>
-            <?php include './themes/default/apply/addressscript.php';?>
-      
-  
+<script type="text/javascript">
+
+    $("#address_other").on("click",function(){
+        art.dialog.open('<?php echo urldecode(Url::urlFormat("/simple/address_other"));?>',{width:960,height:462,lock:true});
+        return false;
+    })
+
+    $(".address-list .modify").each(function(){
+
+        $(this).on("click",function(){
+            var id = $(this).attr("data-value");
+            art.dialog.open('<?php echo urldecode(Url::urlFormat("/simple/address_other/id/"));?>'+id,{width:960,height:462,lock:true});
+        });
+    });
+</script>
+
            </div>
            <!-- E 主控区域 -->
 
            <!-- S 底部区域 -->
            <div id="footer">
                  <?php include './themes/default/layout/footer.php';?>
+                
                     </div>
                     <!-- E 底部区域 -->
-                  <?php include './themes/default/layout/footerscript.php';?>  
+                 <?php include './themes/default/layout/footerscript.php';?>
+                    
                 </body>
                 </html>
 

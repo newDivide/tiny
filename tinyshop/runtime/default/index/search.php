@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="HandheldFriendly" content="True">
- <?php include './themes/default/layout/import.php';?>
+                 <?php include './themes/default/layout/import.php';?>
+    
 </head>
 
 <body>
     <!-- S 头部区域 -->
     <div id="header">
-         <?php include './themes/default/layout/header.php';?>
+                 <?php include './themes/default/layout/header.php';?>
+    
             </div>
             <!-- E 头部区域 -->
             <!-- S 主控区域 -->
@@ -131,16 +133,19 @@
         </div>
     </div>
 </div>
-        <?php include './themes/default/apply/searchscript.php';?>  
+        <?php include './themes/default/layout/searchscript.php';?>
+
            </div>
            <!-- E 主控区域 -->
 
            <!-- S 底部区域 -->
            <div id="footer">
-                 <?php include './themes/default/layout/footer.php';?>        
+                 <?php include './themes/default/layout/footer.php';?>
+                
                     </div>
                     <!-- E 底部区域 -->
-                    <?php include './themes/default/layout/footerscript.php';?>
+                 <?php include './themes/default/layout/footerscript.php';?>
+                    
                 </body>
                 </html>
 
