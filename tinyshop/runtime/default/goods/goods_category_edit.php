@@ -59,7 +59,6 @@
   <!-- tab 头 start -->
     <ul class="tab-head">
       <li>基本信息</li>
-      <li>SEO信息</li>
     </ul>
     <!-- tab 头 end -->
     <!-- tab body start -->
@@ -149,31 +148,7 @@
         </dl>
         </div>
         <!-- E 基本信息-->
-        <!-- S SEO信息-->
-        <div>
-            <dl class="lineD">
-            <dt>页面标题：</dt>
-            <dd>
-              <input name="seo_title" type="text" value="<?php echo isset($seo_title)?$seo_title:"";?>">
-              <label>页面标题(TITLE)</label>
-            </dd>
-            </dl>
-            <dl class="lineD">
-            <dt>页面关键词：</dt>
-            <dd>
-              <input name="seo_keywords" type="text" value="<?php echo isset($seo_keywords)?$seo_keywords:"";?>">
-              <label>页面关键词(META_KEYWORDS)</label>
-            </dd>
-            </dl>
-            <dl class="lineD">
-            <dt>页面描述：</dt>
-            <dd>
-              <input name="seo_description" type="text" value="<?php echo isset($seo_description)?$seo_description:"";?>">
-              <label>页面描述(META_DESCRIPTION)</label>
-            </dd>
-            </dl>
-        </div>
-        <!-- E SEO信息-->
+        
       </div>
     <div style="text-align:center"><input type="submit" value="提交" class="button">&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="重置" class="button"></div>
     </form>

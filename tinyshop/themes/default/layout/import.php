@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#css/common.css"));?>">
     <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#css/font-awesome.min.css"));?>">
     <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#js/artdialog/tiny-dialog.css"));?>">
-    <style type="text/css">
+    <style>
         .swiper-container {width: 100%;}
         .js-template{display:none !important;}
     </style>

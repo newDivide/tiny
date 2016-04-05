@@ -162,3 +162,9 @@ table.attention td {
     text-align: center; }
 
 /*# sourceMappingURL=ucenter.css.map */
+
+input[type="radio"]{
+  display: inline;
+  padding:0;
+  margin:0 10px 0 0;
+}

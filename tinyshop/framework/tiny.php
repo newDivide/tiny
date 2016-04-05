@@ -38,7 +38,7 @@ define('EXCEPTION_HANDLER',true);
   */
 class Tiny
 {
-    //当前的application
+    //当前的application 
     private static $_app;
     //错误处理控制器
     private static $errorsController;

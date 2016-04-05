@@ -131,49 +131,6 @@
         <div class="sub-right">
             <div class="goods-detail clearfix">
                 <div class="content">
-                    <!--S 捆绑销售 -->
-                    <?php $query = new Query("bundling");$query->where = "CONCAT(',',goods_id,',') like '%,$goods[id],%' and status = 1";$bundling = $query->find();?>
-                    <?php if($bundling){?>
-                    <div class="tab ">
-                        <ul class="tab-head">
-                            <?php foreach($bundling as $key => $item){?>
-                            <li>优惠套装<?php echo ($key+1);?><i></i></li>
-                            <?php }?>
-                        </ul>
-                        <div class="tab-body" style="min-height: 180px;">
-                            <ul class="bundling-list">
-                                <?php foreach($bundling as $key => $bun){?>
-                                <?php $gids = $goods['id'].','.$bun['goods_id'];$total_price=0.00;?>
-                                <li class="sub-1 group-item">
-                                    <?php $item=null; $query = new Query("goods");$query->where = "id in($gids)";$query->order = "field(`id`,$gids)";$items = $query->find(); foreach($items as $key => $item){?>
-                                    <?php $total_price+=$item['sell_price'];?>
-                                    <dl class="product goods-item">
-                                        <?php if($key!=0){?><s class="icon-add ie6png icon-plus-16"></s><?php }?>
-                                        <dt class="img">
-                                            <a href="<?php echo urldecode(Url::urlFormat("/index/product/id/$item[id]"));?>"><img src="<?php echo Common::thumb($item['img'],100,100);?>" width="100"></a>
-                                        </dt>
-                                        <dd class="title"><a href="<?php echo urldecode(Url::urlFormat("/index/product/id/$item[id]"));?>"><?php echo TString::msubstr($item['name'],0,6);?></a></dd>
-                                        <dd class="price"><b class="red price"><?php echo isset($item['sell_price'])?$item['sell_price']:"";?><?php echo isset($currency_unit)?$currency_unit:"";?></b></dd>
-                                    </dl>
-                                    <?php }?>
-
-                                </li>
-                                <li class="sub-2 group-item">
-                                    <div class="goods-item" >
-                                        <s class="icon-add ie6png icon-equal-16"></s>
-                                        <div><?php echo isset($bun['title'])?$bun['title']:"";?></div>
-                                        <div>套&nbsp;&nbsp;装&nbsp;&nbsp;价： <?php echo isset($currency_symbol)?$currency_symbol:"";?><?php echo isset($bun['price'])?$bun['price']:"";?></div>
-                                        <div>原　　价： <del><?php echo isset($currency_symbol)?$currency_symbol:"";?><?php echo isset($total_price)?$total_price:"";?></del></div>
-                                        <div>立即节省： <?php echo isset($currency_symbol)?$currency_symbol:"";?><?php echo $total_price-$bun['price'];?></div>
-                                        <div class="mt10"><a href="<?php echo urldecode(Url::urlFormat("/index/bundbuy/id/$bun[id]"));?>" class="btn btn-main">购买套装</a></div>
-                                    </div>
-                                </li>
-                                <?php }?>
-                            </ul>
-                        </div>
-                    </div>
-                    <?php }?>
-                    <!--S 捆绑销售 -->
                     <div class="tab clearfix">
                         <ul class="tab-head">
                             <li>商品详情<i></i></li>

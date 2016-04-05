@@ -938,10 +938,10 @@ textarea {
   .nav-x .item .user-box {
     width: 240px; }
   /* line 437, ../../../themes-sass/sass/default/css/common.scss */
-  .nav-x .item.down:hover {
+  /* .nav-x .item.down:hover {
     background-color: #FFF;
     border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd; }
+    border-right: 1px solid #ddd; } */
     /* line 441, ../../../themes-sass/sass/default/css/common.scss */
     .nav-x .item.down:hover div {
       display: block; }
@@ -2255,11 +2255,15 @@ table.form {
     padding: 6px; }
   /* line 1423, ../../../themes-sass/sass/default/css/common.scss */
   table.form td.label {
+    
+    font-size: 100%;
     text-align: right;
     width: 120px;
-    font-weight: 800; }
+    font-weight: 800;
+    color: #666;
+     }
   /* line 1424, ../../../themes-sass/sass/default/css/common.scss */
-  table.form input[type="text"], table.form table select {
+  .form input[type="text"], table.form table select {
     border: 1px solid #afafaf;
     padding: 0 3px;
     height: 24px;

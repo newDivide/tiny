@@ -42,8 +42,9 @@
         <div class="mt10">最多可保存20个有效地址！</div>
     </div>
 </div>
-
-
+            <?php include './themes/default/apply/addressscript.php';?>
+      
+  
            </div>
            <!-- E 主控区域 -->
 

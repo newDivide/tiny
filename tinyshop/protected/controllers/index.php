@@ -374,6 +374,7 @@ class IndexController extends Controller{
 
             $attr_array = unserialize($goods['attrs']);
             $goods_attrs = array();
+            //????????????????????
             if($attr_array){
                 $rows = $this->model->fields("ga.*,av.name as vname,av.id as vid")->table("goods_attr as ga")->join("left join attr_value as av on ga.id=av.attr_id")->where("ga.type_id = $goods[type_id]")->findAll();
                 $attrs = $_attrs = array();
@@ -391,6 +392,7 @@ class IndexController extends Controller{
                 unset($attrs,$_attrs);
             }
             //评论
+            // a,b,c这里？？、
             $comment = array();
             $review = array('1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0);
             $rows = $this->model->table("review")->fields("count(id) as num,point")->where("status=1 and goods_id = $id")->group("point")->findAll();
@@ -597,6 +599,7 @@ class IndexController extends Controller{
             $has_brand = $model->table("brand")->where("id in ($brand_ids)")->findAll();
         }
         //var_dump($price_range);exit();
+        //array_flip？？？
         if(!empty($price_range))$has_price = array_flip($price_range);
         else $has_price = array();
         if($price && isset($has_price[$price])){
@@ -638,6 +641,7 @@ class IndexController extends Controller{
 
 
         //规格处属性的筛选
+        //并不太懂啊....
         $args = Req::args();
         unset($args['con'],$args['act'],$args['p'],$args['sort'],$args['brand'],$args['price']);
         foreach ($args as $key => $value) {

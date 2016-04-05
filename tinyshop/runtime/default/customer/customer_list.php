@@ -81,8 +81,8 @@
     <?php $item=null; $obj = new Query("customer as c,user as u");$obj->where = "c.user_id = u.id and $where";$obj->page = "1 desc";$items = $obj->find(); foreach($items as $key => $item){?>
         <tr><td style="width:30px"><input type="checkbox" name="id[]" value="<?php echo isset($item['id'])?$item['id']:"";?>"></td>
         <td style="width:70px" class="btn_min"><div class="operat hidden"><a  class="icon-cog action" href="javascript:;"> 处理</a><div class="menu_select"><ul>
-                <li><a class="icon-coin" href="javascript:balance_op(<?php echo isset($item['user_id'])?$item['user_id']:"";?>,2);"> 充值</a></li>
-                <li><a class="icon-credit" href="javascript:balance_op(<?php echo isset($item['user_id'])?$item['user_id']:"";?>,4);"> 退款</a></li>
+               <!--  <li><a class="icon-coin" href="javascript:balance_op(<?php echo isset($item['user_id'])?$item['user_id']:"";?>,2);"> 充值</a></li>
+               <li><a class="icon-credit" href="javascript:balance_op(<?php echo isset($item['user_id'])?$item['user_id']:"";?>,4);"> 退款</a></li> -->
                 <li><a class="icon-pencil" href="<?php echo urldecode(Url::urlFormat("/customer/customer_edit/id/$item[id]"));?>"> 编辑</a></li>
                 <li><a class="icon-remove-2" href="javascript:confirm_action('<?php echo urldecode(Url::urlFormat("/customer/customer_del/id/$item[id]"));?>')"> 删除</a></li>
             </ul></div></div> </td>

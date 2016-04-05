@@ -1,5 +1,4 @@
 <script>
-	
     var attr_extra = '';
     $(".attr").each(function(i){
         var self = $(this);

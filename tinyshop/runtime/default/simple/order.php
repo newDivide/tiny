@@ -4,18 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta charset="UTF-8">
     <meta name="HandheldFriendly" content="True">
-    <link rel="shortcut icon" href="<?php echo urldecode(Url::urlFormat("@favicon.ico"));?>"/>
-    <link rel="bookmark" href="<?php echo urldecode(Url::urlFormat("@favicon.ico"));?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#css/common.css"));?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#css/simple.css"));?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#css/font-awesome.min.css"));?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("#js/artdialog/tiny-dialog.css"));?>">
-
-    <script src="<?php echo urldecode(Url::urlFormat("#js/jquery.min.js"));?>"></script>
-    <script src="<?php echo urldecode(Url::urlFormat("#js/artdialog/dialog-plus-min.js"));?>"></script>
-    <script src="<?php echo urldecode(Url::urlFormat("#js/common.js"));?>"></script>
-    <?php echo JS::import('form');?>
-    <title><?php if(isset($seo_title) && isset($site_title) && ($seo_title == $site_title)){?><?php echo isset($seo_title)?$seo_title:"";?><?php }else{?><?php echo isset($seo_title)?$seo_title:"";?>-<?php echo isset($site_title)?$site_title:"";?><?php }?></title>
+        <?php include './themes/default/layout/import.php';?>
 </head>
 <body>
     <!-- S 头部区域 -->
@@ -76,7 +65,6 @@
                <th style="width:120px;">规格</th>
                <th style="width:100px;">单价</th>
                <th style="width:120px;">数量</th>
-               <th style="width:100px;">优惠</th>
                <th style="width:100px;">小计</th>
            </tr>
            <?php $total=0.00;$weight=0;$point=0;?>
@@ -84,7 +72,7 @@
            <?php $total+=$item['amount'];$weight += ($item['weight']*$item['num']);$point += ($item['point']*$item['num']);?>
            <tr id="<?php echo isset($item['id'])?$item['id']:"";?>"><td><a href="<?php echo urldecode(Url::urlFormat("/index/product/id/$item[goods_id]"));?>" target="_blank"><img src="<?php echo urldecode(Url::urlFormat("@$item[img]"));?>" width="50" height="50"></a></td><td><a href="<?php echo urldecode(Url::urlFormat("/index/product/id/$item[goods_id]"));?>" target="_blank"><?php echo isset($item['name'])?$item['name']:"";?></a></td> <td><?php foreach($item['spec'] as $key => $spec){?>
             <p title="<?php echo isset($spec['name'])?$spec['name']:"";?>:<?php echo isset($spec['value'][2])?$spec['value'][2]:"";?>"><?php echo isset($spec['name'])?$spec['name']:"";?>：<?php echo isset($spec['value'][2])?$spec['value'][2]:"";?></p>
-            <?php }?></td> <td class="tr"><?php echo isset($item['price'])?$item['price']:"";?></td> <td class="tc"><div  class="buy-num-bar buy-num clearfix"><?php echo isset($item['num'])?$item['num']:"";?></div></td> <td class="prom tc"><?php echo isset($item['prom'])?$item['prom']:"";?></td> <td class="amount red tr"><?php echo isset($item['amount'])?$item['amount']:"";?></td> </tr>
+            <?php }?></td> <td class="tr"><?php echo isset($item['price'])?$item['price']:"";?></td> <td class="tc"><div  class="buy-num-bar buy-num clearfix"><?php echo isset($item['num'])?$item['num']:"";?></div></td><td class="amount red tr"><?php echo isset($item['amount'])?$item['amount']:"";?></td> </tr>
             <?php }?>
         </table>
         <?php $prom = new Prom($total);$proms = $prom->meetProms();?>
@@ -92,33 +80,6 @@
         <table class="mt10 simple noborder form">
             <tr><td> <p>订单备注信息：<input type="text" name="user_remark" style="width:346px;"></p> </td> <td width="260" class="tr">购物车商品合计：</td> <td width="140"><div class="mb10 mt10" style=" background: #f0f0f0;"><span class="fr"><span style=""><span class="currency-symbol f18"><?php echo isset($currency_symbol)?$currency_symbol:"";?></span><b class="cart-total red f18" id="total-amount" total="<?php echo isset($total)?$total:"";?>"><?php echo sprintf("%01.2f",$total);?> </b></span></span></div>
             </td></tr>
-            <tr>
-                <td >
-                   <p >订单促销活动：<?php if(!empty($proms)){?><select name="prom_id" id="prom_order">
-                    <?php foreach($proms as $key => $item){?>
-                    <?php $parse_prom = $prom->parsePorm($item);?>
-                    <option value="<?php echo isset($item['id'])?$item['id']:"";?>" data-type="<?php echo isset($item['type'])?$item['type']:"";?>" data-value="<?php echo isset($parse_prom['value'])?$parse_prom['value']:"";?>">&nbsp;&nbsp;<?php echo isset($parse_prom['note'])?$parse_prom['note']:"";?>&nbsp;&nbsp;</option>
-                    <?php }?>
-                </select><?php }?></p>
-            </td>
-            <td class="tr">
-
-                <p class="fr">订单优惠：</p>
-            </td>
-            <td class="tr">- <b id="prom_order_text">0</b></td>
-
-        </tr>
-        <?php if($open_invoice){?>
-        <tr >
-            <td>
-               <p style="height:32px;line-height:32px;">索要发票(<?php echo isset($tax)?$tax:"";?>%)：<input type="checkbox" name="is_invoice" id="is_invoice" value="1" data-value="<?php echo isset($tax)?$tax:"";?>">&nbsp;&nbsp;<span id="invoice" <?php if(isset($is_invoice) && $is_invoice==1){?> <?php }else{?>style="display:none;"<?php }?>>发票抬头：<select name="invoice_type"><option value="0">个人</option><option value="1">单位</option></select>&nbsp;&nbsp;<input type="text" name="invoice_title" ></span></p>
-           </td>
-           <td class="tr">税：</td>
-           <td>
-            <p class="fr">+ <b id="taxes" data-value="<?php echo isset($tax)?$tax:"";?>">0</b></p>
-        </td>
-    </tr>
-    <?php }?>
     <tr>
         <td >
         </td>
@@ -127,18 +88,6 @@
             <p class="fr">+ <b id="fare" data-weight="<?php echo isset($weight)?$weight:"";?>"><?php echo $fare->calculate(16);?></b></p>
         </td>
     </tr>
-    <tr>
-        <td >
-        </td>
-        <td class="tr orange">送积分：</td>
-        <td>
-            <p class="fr orange"><b id="point" data-point="<?php echo isset($point)?$point:"";?>"><?php echo isset($point)?$point:"";?></b></p>
-        </td>
-    </tr>
-    <tr><td>
-        <a href="javascript:;" id="voucher-btn" style="line-height: 25px;height:25px;"><i class="icon-plus "></i>使用代金券抵消部分总额：</a>
-    </td><td class="tr">代金券：</td>
-    <td class="tr">- <b id="voucher">0.00</b></td></tr>
 </table>
 </div>
 <div class="box p15 mt5" id="voucher-n" style="display: none">
@@ -172,158 +121,8 @@
 </form>
 </div>
 </div>
-<script type="text/javascript">
 
-    $("#address_other").on("click",function(){
-        art.dialog.open('<?php echo urldecode(Url::urlFormat("/simple/address_other"));?>',{width:960,height:460,lock:true});
-        return false;
-    })
-    $(".address-list .modify").each(function(){
-
-        $(this).on("click",function(){
-            var id = $(this).attr("data-value");
-            art.dialog.open('<?php echo urldecode(Url::urlFormat("/simple/address_other/id/"));?>'+id,{width:960,height:460,lock:true});
-            return false;
-        });
-    });
-    $("#voucher-n").Paging({
-        url:'<?php echo urldecode(Url::urlFormat("/simple/get_voucher"));?>',
-        params:{amount:<?php echo isset($total)?$total:"";?>},
-        callback:function(){
-
-            calculate();
-            $("#voucher-n input[name='voucher']").each(function(){
-                $(this).on("click",function(){
-                    calculate();
-                });
-            });
-        }
-    });
-    $("#voucher-cancel").on("click",function(){
-        if($("#voucher-n input[name='voucher']:checked").size()>0){
-            $("#voucher-n input[name='voucher']:checked").prop("checked",false);
-            calculate();
-        }
-    })
-    $("#voucher-btn").on("click",function(){
-        $("#voucher-n").toggle();
-        if($("i",this).hasClass("icon-plus")){
-            $("i",this).removeClass("icon-plus");
-            $("i",this).addClass("icon-minus");
-        }
-        else{
-            $("i",this).removeClass("icon-minus");
-            $("i",this).addClass("icon-plus");
-        }
-    })
-
-    $(".address-list li").each(function(){
-        $(this).has("input[name='address_id']:checked").addClass("selected");
-        $(this).on("click",function(){
-            $(".address-list li").removeClass("selected");
-            $("input[name='address_id']").removeProp("checked");
-            $("input[name='address_id']",this).prop("checked","checked");
-            $(this).addClass("selected");
-            $("a.default").hide();
-            $("a.default",this).show();
-            var id = $("input[name='address_id']",this).val();
-            var weight = $("#fare").attr("data-weight");
-            $.post("<?php echo urldecode(Url::urlFormat("/ajax/calculate_fare"));?>",{weight:weight,id:id},function(data){
-                if(data['status']=='success'){
-                    $("#fare").text(data['fee']);
-                    calculate();
-                }
-            },'json');
-        });
-    });
-    FireEvent($(".address-list  input[name='address_id']:checked").get(0),"click");
-
-    $(".payment-list li").each(function(){
-        $(this).has("input[name='payment_id']:checked").addClass("selected");
-        $(this).on("click",function(){
-            $(".payment-list li").removeClass("selected");
-            $("input[name='payment_id']").removeProp("checked");
-            $("input[name='payment_id']",this).prop("checked","checked");
-            $(this).addClass("selected");
-        });
-    });
-
-    $("#prom_order").on("change",function(){
-        calculate();
-    });
-    $("#is_invoice").on("click",function(){
-        if(!!$(this).prop("checked")){
-            $("#invoice").show();
-        }
-        else $("#invoice").hide();
-        calculate();
-    })
-
-    //计算实付金额
-    function calculate(){
-        var total = parseFloat($("#total-amount").attr("total"));
-        var voucher = 0;
-        var fare = parseFloat($("#fare").text());
-        if($("#voucher-n input[name='voucher']:checked").size()>0){
-            voucher = parseFloat($("#voucher-n input[name='voucher']:checked").attr('data-value'));
-            if(voucher==undefined) voucher =0;
-        }
-        total -= voucher;
-        $("#voucher").text(voucher.toFixed(2));
-        if(total<=0) total = 0;
-
-        if($("#is_invoice").size()>0){
-            if(!!$("#is_invoice").attr("checked")){
-                var tax_fee = (total*<?php echo isset($tax)?$tax:"";?>/100);
-                total += tax_fee;
-                $("#taxes").text(tax_fee.toFixed(2));
-            }
-            else{
-                $("#taxes").text("0.00");
-            }
-        }
-
-        total += fare;
-        if($("#prom_order").size()>0){
-            var prom_order = $("#prom_order").find("option:selected");
-            var type = prom_order.attr("data-type");
-            var value = parseFloat(prom_order.attr("data-value"));
-            var data_point =parseInt($("#point").attr("data-point"));
-
-            $("#point").text(data_point);
-            if(type!=4){
-
-                if(type==2){
-                    data_point = data_point*value;
-                    $("#point").text(data_point);
-                    $("#prom_order_text").text('0.00');
-                }else{
-                    total = (total-value);
-                    $("#prom_order_text").text(value.toFixed(2));
-                }
-
-            }
-            else {
-                total = (total-value-fare);
-                $("#prom_order_text").text(fare.toFixed(2));
-            }
-        }
-        if(total<0)total = 0;
-        $("#real-total").text(total.toFixed(2));
-    }
-    calculate();
-    var form = new Form();
-    form.setValue('address_id',"<?php echo isset($order_status['address_id'])?$order_status['address_id']:$address_default;?>");
-    form.setValue('payment_id',"<?php echo isset($order_status['payment_id'])?$order_status['payment_id']:$payment_default;?>");
-    form.setValue('user_remark',"<?php echo isset($order_status['user_remark'])?$order_status['user_remark']:"";?>");
-    form.setValue('prom_id',"<?php echo isset($order_status['prom_id'])?$order_status['prom_id']:"";?>");
-    <?php if(isset($is_invoice) && $is_invoice == 1){?>
-    form.setValue('is_invoice',"<?php echo isset($is_invoice)?$is_invoice:"";?>");
-    form.setValue('invoice_type',"<?php echo isset($invoice_type)?$invoice_type:"";?>");
-    form.setValue('invoice_title',"<?php echo isset($invoice_title)?$invoice_title:"";?>");
-        //FireEvent(document.getElementById('is_invoice'), 'click');
-        <?php }?>
-    </script>
+        <?php include './themes/default/apply/orderconfirm.php';?>
 
     </div>
     <!-- E 主控区域 -->

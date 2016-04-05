@@ -71,8 +71,6 @@
     <ul class="tab-head">
       <li>基本信息</li>
       <li>描述信息</li>
-      <li>SEO信息</li>
-      <li>售后保障</li>
     </ul>
     <!-- tab 头 end -->
     <!-- tab body start -->
@@ -116,41 +114,11 @@
         </dl>
         <dl class="lineD">
           <dt>
-            品牌：
-          </dt>
-          <dd>
-            <select name="brand_id">
-              <option value="0">请选择品牌...</option>
-              <?php $item=null; $query = new Query("brand");$items = $query->find(); foreach($items as $key => $item){?>
-              <option value="<?php echo isset($item['id'])?$item['id']:"";?>"><?php echo isset($item['name'])?$item['name']:"";?></option>
-              <?php }?>
-            </select>
-            <label></label>
-          </dd>
-        </dl>
-        <dl class="lineD">
-          <dt>
             <b class="red">*</b>
             商品名称：
           </dt>
           <dd>
             <input name="name" type="text" pattern="required" value="<?php echo isset($name)?$name:"";?>" style="width:400px;" alt="不能为空">
-            <label></label>
-          </dd>
-        </dl>
-        <dl class="lineD">
-          <dt>
-            商品副标题：
-          </dt>
-          <dd>
-            <input name="subtitle" type="text"  value="<?php echo isset($subtitle)?$subtitle:"";?>" style="width:400px;" >
-            <label></label>
-          </dd>
-        </dl>
-        <dl class="lineD">
-          <dt>商品关键词：</dt>
-          <dd>
-            <input name="tag_ids" type="text"  value="<?php echo isset($tag_ids)?$tag_ids:"";?>" style="width:400px;">
             <label></label>
           </dd>
         </dl>
@@ -378,40 +346,7 @@
   </div>
   <!-- 描述信息 end -->
   <!-- 基本信息 end -->
-  <!-- SEO 信息 start -->
-  <div>
-    <dl class="lineD">
-      <dt>页面标题：</dt>
-      <dd>
-        <input name="seo_title" type="text" value="<?php echo isset($seo_title)?$seo_title:"";?>">
-        <label>页面标题(TITLE)</label>
-      </dd>
-    </dl>
-    <dl class="lineD">
-      <dt>页面关键词：</dt>
-      <dd>
-        <input name="seo_keywords" type="text" value="<?php echo isset($seo_keywords)?$seo_keywords:"";?>">
-        <label>页面关键词(META_KEYWORDS)</label>
-      </dd>
-    </dl>
-    <dl class="lineD">
-      <dt>页面描述：</dt>
-      <dd>
-        <input name="seo_description" type="text" value="<?php echo isset($seo_description)?$seo_description:"";?>">
-        <label>页面描述(META_DESCRIPTION)</label>
-      </dd>
-    </dl>
-  </div>
-  <!-- SEO 信息 end -->
-  <!-- 售后保障 start -->
-  <div>
-    <h2>售后保障：</h2>
-    <div>
-      <textarea id="sale_protection"  name="sale_protection" style="width:700px;height:360px;visibility:hidden;"><?php echo isset($sale_protection)?$sale_protection:"";?></textarea>
-      <label></label>
-    </div>
-  </div>
-  <!-- 售后保障 end -->
+  
 </div>
 <!-- tab 头 end -->
 <div style="text-align:center;margin-top:20px;">

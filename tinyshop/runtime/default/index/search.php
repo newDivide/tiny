@@ -131,7 +131,7 @@
         </div>
     </div>
 </div>
-        <?php include './themes/default/layout/apply/searchscript.php';?>  
+        <?php include './themes/default/apply/searchscript.php';?>  
            </div>
            <!-- E 主控区域 -->
 

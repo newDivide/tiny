@@ -61,6 +61,7 @@
         fade: true});
     var skuMap = <?php echo JSON::encode($skumap);?>;
     //更新库存信息
+
     var store_nums = 0;
     for(i in skuMap){
         store_nums += parseInt(skuMap[i]['store_nums']);
@@ -116,6 +117,7 @@
             }
         })
     })
+    //重新计算库存计算是否库存不够
     function changeStatus(){
         var specs_array = new Array();
         $(".spec-values").each(function(i){

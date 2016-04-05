@@ -76,6 +76,9 @@
             self.on("mouseenter",reLoad);
             
             // 计算大小图之间的比例
+            /* 函数中的this是根据图片路径得到的原图，所以option.largewidth是图片的原尺寸
+                img取得的是在dom节点上已经定义好了图片大小 即为420*420
+            */
             function reLoad(){
                 var img = self.find("img:eq(0)");
                 if(img.attr("source") == large.attr("src")) return;
@@ -88,7 +91,6 @@
                     x: img.width() / option.largewidth,
                     y: img.height() / option.largeheight
                 }
-            
                 // 定义一些尺寸
                 var size = 
                 {
