@@ -59,7 +59,6 @@
     <a class="icon-eye-blocked" href="<?php echo urldecode(Url::urlFormat("/order/order_list/status/2"));?>"> 未审核</a>
     <a class="icon-cogs" href="<?php echo urldecode(Url::urlFormat("/order/order_list/status/3"));?>"> 执行中</a>
 
-    <span class="fr"><a href='javascript:;' id="condition" class="icon-search" style="" > 筛选条件</a><input id="condition_input" type="hidden" name="condition" value="<?php echo isset($condition)?$condition:"";?>"></span>
 </div>
 <table class="default" >
     <tr>

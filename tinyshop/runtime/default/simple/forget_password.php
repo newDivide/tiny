@@ -28,25 +28,19 @@
 
     <!-- S 主控区域 -->
     <div id="main" class="simple-main">
-        <div class="magic-bg">
-    <div class="simple-box " >
-        <div class="title">
-            <div class="sub-1"><h1>会员登录</h1></div>
-            <div class="sub-2"><a href="<?php echo urldecode(Url::urlFormat("/simple/reg"));?>">立即注册</a></div>
-        </div>
-        <form action="<?php echo urldecode(Url::urlFormat("/simple/login_act"));?>" class="reg-box" method="post" callback="checkReadme">
-            <input type="hidden" name="redirectURL" value="<?php echo isset($redirectURL)?$redirectURL:$this->perPage();?>">
-            <ul class="form  ">
-                <li><span class="perfix fa">&#xf007;</span><input name="account" id="account"  class="input" pattern="required" placeholder="邮箱/用户名/已验证手机"><label></label></li>
-                <li><span class="perfix fa">&#xf084;</span><input class="input" name="password" type="password" placeholder="密码" pattern="required" alt="密码不能为空"></li>
-                <li><input name="autologin" id="readme" type="checkbox" value="1"> <label>自动登录</label> <label>[<a href="<?php echo urldecode(Url::urlFormat("/simple/forget_password"));?>">忘记密码?</a>]</label></li>
-                <li><button class="btn btn-main " style="padding:10px 40px; width:100%;box-sizing: border-box;-webkit-box-sizing:border-box;">登录</button></li>
-            </ul>
-        </form>
-    </div>
+        <?php echo JS::import('form');?>
+<?php $items=array("填写账户信息","验证身份","设置新密码","完成");?>
+<div id='widget_sub_navs'><?php $widget = Widget::createWidget('sub_navs');$widget->action = "crumbs";$widget->items = $items;$widget->step = "4";$widget->current = "1";$widget->cache = "false";$widget->run();?></div>
+<div class="simple-box " style="width:600px;margin:40px auto;" >
+	<form action="<?php echo urldecode(Url::urlFormat("/simple/forget_act"));?>" method="post" >
+		<ul class="form">
+			<li><span class="perfix fa">&#xf007;</span><input class="input"  name="account" id="account"  pattern="required" placeholder="邮箱/手机号码"> <label>邮箱/手机号码</label></li>
+			<li><span class="perfix fa">&#xf02a;</span><input type="text" class="input-sm" name="verifyCode" id="verifyCode"  pattern="\w{4}" maxlength="4" style="width: 80px;" placeholder="验证码"><label style="display:none"></label><img id="captcha_img"  src="<?php echo urldecode(Url::urlFormat("/simple/captcha/h/40/w/120"));?>"><label><a href="javascript:void(0)" class="red" onclick="document.getElementById('captcha_img').src='<?php echo urldecode(Url::urlFormat("/simple/captcha/h/40/w/120/random/"));?>'+Math.random()">换一张</a></label></li>
+			<li><input type="submit" class="btn btn-main" value="找回密码"></li>
+		</ul>
+	</form>
 </div>
-    <?php include './themes/default/apply/loginscript.php';?>
-
+    <?php include './themes/default/apply/forget_password.php';?>
 
     </div>
     <!-- E 主控区域 -->
@@ -54,7 +48,7 @@
     <!-- S 底部区域 -->
     <div id="footer">
         <?php include './themes/default/layout/footer.php';?>
-       
+        
     </div>
     <!-- E 底部区域 -->
 </body>

@@ -60,8 +60,6 @@
     <a href='javascript:;' onclick="tools_submit({action:'<?php echo urldecode(Url::urlFormat("/goods/set_online/status/0"));?>'});" class="icon-point-up" > 上架</a>
     <a href='javascript:;' onclick="tools_submit({action:'<?php echo urldecode(Url::urlFormat("/goods/set_online/status/1"));?>'});" class="icon-point-down" > 下架</a>
     <a class="icon-delicious" href="<?php echo urldecode(Url::urlFormat("/goods/goods_list"));?>"> 全部商品</a>
-
-    <span class="fr"><a href='javascript:;' id="condition" class="icon-search" style="" > 筛选条件</a><input id="condition_input" type="hidden" name="condition" value="<?php echo isset($condition)?$condition:"";?>"></span>
 </div>
 <table class="default" >
     <tr>

@@ -67,9 +67,9 @@
                 </li>
                 <?php }?>
                 <li>
-                <dt>&nbsp;</dt><dd><input id="readme" type="checkbox" alt="同意后才可注册"><label></label><label>我已阅读并同意《<a class="" id="user-license" href="javascript:;"><?php echo isset($site_title)?$site_title:"";?>用户注册协议</a>》</label></dd>
+                <dt>&nbsp;</dt><dd><input id="readme" type="checkbox" alt="同意后才可注册"><label></label><label>我已阅读并同意用户注册协议</label></dd>
             </li>
-            <li><button class="btn btn-main " style="padding:10px 40px; width:100%">同意协议，立即注册</button></li>
+            <li><button class="btn btn-main " style="padding:10px 40px; width:100%;box-sizing:border-box;-webkit-box-sizing:border-box;">同意协议，立即注册</button></li>
             <input type='hidden' name='tiny_token_reg' value='<?php echo Tiny::app()->getToken("reg");?>'/>
             </ul>
 
@@ -86,167 +86,14 @@
 </div>
 
 <?php echo JS::import('form');?>
-<script type="text/javascript">
-
-    var dlg;
-	$("#user-license").on("click",function(){
-		dlg = dialog({id:'license-dialog',opacity:0.3,padding:'20px 10px 10px 20px',width:900,title:'用户注册协议',content:document.getElementById('license-content'),lock:true});
-        dlg.showModal();
-	});
-
-	function closeLicense(){
-		$('#readme').attr("checked",'true');
-		autoValidate.showMsg({id:document.getElementById('readme'),error:false,msg:''});
-		dlg.close().remove();
-	}
-
-	$("#sendSMS").click(function(){
-		var data = 'mobile=' + $("#mobile").val()+'&r=' + Math.random();
-		if(autoValidate.validate(document.getElementById('mobile'))===false)return;
-
-		$.ajax({
-			type: "get",
-			url: "<?php echo urldecode(Url::urlFormat("/ajax/send_sms"));?>",
-            data: data,
-            dataType:'json',
-            success:function(result){
-            	if(result['status']=='success'){
-            		$('#mobile').attr("readonly","readonly");
-            		var send_sms = $("#sendSMS");
-            		send_sms.attr("disabled",true);
-            		send_sms.addClass("btn-disable");
-            		var i = 120;
-                    send_sms.val(i + '秒后重新获取');
-                    var timer = setInterval(function () {
-                        i--;
-                        send_sms.val(i + '秒后重新获取');
-                        if (i <= 0) {
-                            clearInterval(timer);
-                            send_sms.val('获取短信验证码');
-                            $('#mobile').removeAttr("readonly");
-                            send_sms.removeClass("btn-disable");
-                            send_sms.attr("disabled",false);
-                        }
-                    }, 1000);
-            	}else{
-            		art.dialog.tips("<p class='fail'>"+result['msg']+"</p>");
-            	}
-            }
-        });
-	});
-
-	$("input[name='email']").on("change",function(event){
-		if(autoValidate.validate(event)){
-			$.post("<?php echo urldecode(Url::urlFormat("/ajax/email/email/"));?>"+$(this).val(),function(data){
-			autoValidate.showMsg({id:document.getElementById('email'),error:!data['status'],msg:data['msg']});
-		},'json');
-		}
-	});
-
-    $("input[name='mobile']").on("change",function(event){
-        if(autoValidate.validate(event)){
-            $.post("<?php echo urldecode(Url::urlFormat("/ajax/mobile/mobile/"));?>"+$(this).val(),function(data){
-            autoValidate.showMsg({id:document.getElementById('mobile'),error:!data['status'],msg:data['msg']});
-        },'json');
-        }
-    });
-
-	$("input[name='verifyCode']").on("change",function(){
-		$.post("<?php echo urldecode(Url::urlFormat("/ajax/verifyCode/verifyCode/"));?>"+$(this).val(),function(data){
-			autoValidate.showMsg({id:document.getElementById('verifyCode'),error:!data['status'],msg:data['msg']});
-		},'json');
-	})
-	$("#readme").on("change",function(){
-		if($("#readme:checked").length>0)autoValidate.showMsg({id:document.getElementById('readme'),error:false,msg:''});
-		else autoValidate.showMsg({id:document.getElementById('readme'),error:true,msg:'同意后才可注册'});
-	});
-	function checkReadme(e){
-		if(e) return false;
-		else{
-			if($("#readme:checked").length>0)return true;
-			{
-				autoValidate.showMsg({id:document.getElementById('readme'),error:true,msg:'同意后才可注册'});
-				return false;
-			}
-		}
-	}
-	<?php if(isset($invalid)){?>
-		var form = new Form();
-		form.setValue('email', '<?php echo isset($email)?$email:"";?>');
-		autoValidate.showMsg({id:$("input[name='<?php echo isset($invalid['field'])?$invalid['field']:"";?>']").get(0),error:true,msg:"<?php echo isset($invalid['msg'])?$invalid['msg']:"";?>"});
-	<?php }?>
-
-    $("input[pattern]").on("blur",function(event){
-            $(".invalid-msg , .valid-msg").hide();
-            var current_input = $(this);
-            var result = autoValidate.validate(event);
-            if(result){
-                    current_input.parent().removeClass('invalid').addClass('valid');
-                }else{
-                    current_input.parent().removeClass('valid').addClass('invalid');
-                }
-            if(result){
-                if(current_input.attr('id')=='email'){
-                    $.post("<?php echo urldecode(Url::urlFormat("/ajax/email/email/"));?>"+$(this).val(),function(data){
-                        var msg = '合法用户';
-                        if(!data['status']){
-                            msg = '用户已存在';
-                            current_input.next().show();
-                            current_input.parent().removeClass('valid').addClass('invalid');
-                        }else{
-                            current_input.parent().removeClass('invalid').addClass('valid');
-                        }
-                        autoValidate.showMsg({id:document.getElementById('email'),error:!data['status'],msg:msg});
-                    },'json');
-                }if(current_input.attr('id')=='mobile'){
-                    $.post("<?php echo urldecode(Url::urlFormat("/ajax/mobile/mobile/"));?>"+$(this).val(),function(data){
-                        var msg = '合法用户';
-                        if(!data['status']){
-                            msg = '用户已存在';
-                            current_input.next().show();
-                            current_input.parent().removeClass('valid').addClass('invalid');
-                        }else{
-                            current_input.parent().removeClass('invalid').addClass('valid');
-                        }
-                        autoValidate.showMsg({id:document.getElementById('mobile'),error:!data['status'],msg:msg});
-                    },'json');
-                }else if(current_input.attr('id')=='verifyCode'){
-                    $.post("<?php echo urldecode(Url::urlFormat("/ajax/verifyCode/verifyCode/"));?>"+$(this).val(),function(data){
-                        autoValidate.showMsg({id:document.getElementById('verifyCode'),error:!data['status'],msg:data['msg']});
-                        if(!data['status']) current_input.next().show();
-                    },'json');
-                }
-                $(".invalid-msg").show();
-            }else{
-                current_input.next().show();
-            }
-        });
-</script>
+        <?php include './themes/default/apply/regscript.php';?>
 
     </div>
     <!-- E 主控区域 -->
 
     <!-- S 底部区域 -->
     <div id="footer">
-        <div class="copyright">
-            <!--S 济南泰创软件科技有限公司保留所有版权，非授权用户严禁删除版权信息；擅自删除，后果自负。-->
-            <div class="container bootom">
-            <div class="sub-1">
-                <div class="logo"></div>
-            </div>
-            <div class="sub-2">
-            <div><?php $item=null; $query = new Query("nav");$query->where = "type = 'bottom'";$query->order = "`sort` desc";$items = $query->find(); foreach($items as $key => $item){?>
-                <a href="<?php if(strstr($item['link'],'http://')===false){?><?php echo urldecode(Url::urlFormat("$item[link]"));?><?php }else{?><?php echo isset($item['link'])?$item['link']:"";?><?php }?>" target="<?php if($item['open_type']==1){?>_blank<?php }else{?>_self<?php }?>"><?php echo isset($item['name'])?$item['name']:"";?></a>
-                <?php }?></div>
-            <span>Powered by <a href="http://www.tinyrise.com"><b style="color: #e74503">Tiny</b><b style="color: #999">Shop</b></a></span> © 2015 <a href="http://www.tinyrise.com">tinyrise.com</a> . 保留所有权利 。 </div>
-            <div class="sub-3">
-                <a target="_blank" href="#"><img src="<?php echo urldecode(Url::urlFormat("#images/v-logo-2.png"));?>" alt="诚信网站"></a>
-                <a target="_blank" href="#"><img src="<?php echo urldecode(Url::urlFormat("#images/v-logo-1.png"));?>" alt="诚信网站"></a>
-                <a target="_blank" href="#"><img src="<?php echo urldecode(Url::urlFormat("#images/v-logo-3.png"));?>" alt="网上交易保障中心"></a>
-            </div>
-            </div>
-            <!--S 济南泰创软件科技有限公司保留所有版权，非授权用户严禁删除版权信息；擅自删除，后果自负。-->
-        </div>
+        <?php include './themes/default/layout/footer.php';?>
     </div>
     <!-- E 底部区域 -->
 </body>

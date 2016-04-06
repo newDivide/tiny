@@ -58,7 +58,7 @@
     <a  class="icon-remove-2" href="javascript:;" onclick="tools_submit({action:'<?php echo urldecode(Url::urlFormat("/customer/customer_del"));?>',msg:'删除后无法恢复，你真的删除吗？'})" title="删除"> 删除</a>
     <a href='<?php echo urldecode(Url::urlFormat("/customer/customer_edit"));?>' class="icon-plus" > 添加</a>
     <a class="icon-delicious" href="<?php echo urldecode(Url::urlFormat("/customer/customer_list"));?>"> 全部用户</a>
-    <span class="fr"><a href='javascript:;' id="condition" class="icon-search" style="" > 筛选条件</a><input id="condition_input" type="hidden" name="condition" value="<?php echo isset($condition)?$condition:"";?>"></span>
+    
 </div>
 <table class="default" >
     <tr>

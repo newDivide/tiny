@@ -138,14 +138,14 @@
             <table class="default border" style="width:auto;">
               <thead>
                 <tr>
-                  <th >积分</th>
+                 <!--  <th >积分</th> -->
                   <th >排序</th>
                   <th >计量单位</th>
                   <th style="width:100px;">是否上架</th>
                 </tr>
                 <tr class="min_inputs">
-                  <td>
-                    <input class="small" name="point" id="point" type="text" empty="" pattern="int" value="<?php echo isset($point)?$point:0;?>"></td>
+                  <!-- <td>
+                    <input class="small" name="point" id="point" type="text" empty="" pattern="int" value="<?php echo isset($point)?$point:0;?>"></td> -->
                   <td>
                     <input class="small" name="sort" id="sort" type="text" pattern="int" empty="" value="<?php echo isset($sort)?$sort:1;?>"></td>
                   <td>

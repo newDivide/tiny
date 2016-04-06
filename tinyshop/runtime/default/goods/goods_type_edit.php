@@ -58,7 +58,7 @@
 <form action="<?php echo urldecode(Url::urlFormat("/goods/goods_type_save"));?>" method="post" callback="check_invalid">
  <?php if(isset($id)){?><input type="hidden" name="id" value="<?php echo isset($id)?$id:"";?>"><?php }?>
 <div id="obj_form" class="form2 tab">
-  <ul class="tab-head"><li>基本信息</li><li class="current">规格</li><li class="current">品牌</li></ul>
+  <ul class="tab-head"><li>基本信息</li><li class="current">规格</li><!-- <li class="current">品牌</li> --></ul>
     <div class="tab-body">
     <!--属性 start-->
       <div>
@@ -130,15 +130,15 @@
         </div>
       <!--规格 end-->
       <!--S 品牌-->
-        <div>
-          <ul class="clearfix brand-list">
-            <?php $brand = isset($brand)?$brand:''; $brand_str = ','.$brand.',';?>
-            <?php $item=null; $query = new Query("brand");$items = $query->find(); foreach($items as $key => $item){?>
-            <?php $bid = ','.$item['id'].',';?>
-            <li><input type="checkbox" <?php if(strpos($brand_str,$bid)!==false){?>checked="checked"<?php }?> name="brand[]" value="<?php echo isset($item['id'])?$item['id']:"";?>"><label><?php echo isset($item['name'])?$item['name']:"";?></label></li>
-            <?php }?>
-          </ul>
-        </div>
+      <!--   <div>
+        <ul class="clearfix brand-list">
+          <?php $brand = isset($brand)?$brand:''; $brand_str = ','.$brand.',';?>
+          <?php $item=null; $query = new Query("brand");$items = $query->find(); foreach($items as $key => $item){?>
+          <?php $bid = ','.$item['id'].',';?>
+          <li><input type="checkbox" <?php if(strpos($brand_str,$bid)!==false){?>checked="checked"<?php }?> name="brand[]" value="<?php echo isset($item['id'])?$item['id']:"";?>"><label><?php echo isset($item['name'])?$item['name']:"";?></label></li>
+          <?php }?>
+        </ul>
+      </div> -->
       <!--E 品牌-->
     </div>
 </div>

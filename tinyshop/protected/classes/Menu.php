@@ -21,12 +21,6 @@ class Menu
 
         '/admin/payment_list'=>array('name'=>'支付方式','parent'=>'delivery'),
         '/admin/payment_edit'=>array('name'=>'编辑支付方式','parent'=>'delivery'),
-        '/admin/zoning_list'=>array('name'=>'区域划分','parent'=>'delivery'),
-        '/admin/area_list'=>array('name'=>'地区管理','parent'=>'delivery'),
-        '/admin/fare_list'=>array('name'=>'运费模板','parent'=>'delivery'),
-        '/admin/fare_edit'=>array('name'=>'运费模板编辑','parent'=>'delivery'),
-        '/admin/express_company_list'=>array('name'=>'快递公司','parent'=>'delivery'),
-        '/admin/express_company_edit'=>array('name'=>'快递公司编辑','parent'=>'delivery'),
 
         '/admin/manager_list'=>array('name'=>'管理员','parent'=>'safe'),
 
@@ -105,7 +99,6 @@ class Menu
         'ask_reviews'=>array('name'=>'咨询与评价','parent'=>'customer'),
         'order'=>array('name'=>'订单管理','parent'=>'order'),
         'receipt'=>array('name'=>'单据管理','parent'=>'order'),
-        'express'=>array('name'=>'快递单配置','parent'=>'order'),
         'count'=>array('name'=>'销售统计','parent'=>'count'),
         'customer_count'=>array('name'=>'客户统计','parent'=>'count'),
         'promotions'=>array('name'=>'促销活动','parent'=>'marketing'),

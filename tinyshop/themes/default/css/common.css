@@ -1,9 +1,9 @@
 @charset "UTF-8";
 /* line 5, D:/soft/Koala/rubygems/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
-*{
+  *{
   -webkit-box-sizing: initial; 
   -moz-box-sizing: initial;
-   box-sizing: initial; }
+   box-sizing: initial; }  
    a:hover,a:active{
     text-decoration: none;
    }
@@ -2263,13 +2263,6 @@ table.form {
     color: #666;
      }
   /* line 1424, ../../../themes-sass/sass/default/css/common.scss */
-  .form input[type="text"], table.form table select {
-    border: 1px solid #afafaf;
-    padding: 0 3px;
-    height: 24px;
-    line-height: 24px;
-    vertical-align: middle;
-    zoom: 1; }
   /* line 1425, ../../../themes-sass/sass/default/css/common.scss */
   table.form input[type="text"], table.form select, table.form input[type="password"] {
     border: 1px solid #afafaf;

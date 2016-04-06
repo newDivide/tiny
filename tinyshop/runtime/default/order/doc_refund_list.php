@@ -57,7 +57,7 @@
     <a class="icon-checkbox-checked icon-checkbox-unchecked" href="javascript:;" onclick="tools_select('id[]',this)" title="全选" data="true"> 全选 </a>
     <a class="icon-delicious" href="<?php echo urldecode(Url::urlFormat("/order/doc_refund_list"));?>"> 显示全部 </a>
     
-    <span class="fr"><a href='javascript:;' id="condition" class="icon-search" style="" > 筛选条件</a><input id="condition_input" type="hidden" name="condition" value="<?php echo isset($condition)?$condition:"";?>"></span>
+    
     
 </div>
 <table class="default" >

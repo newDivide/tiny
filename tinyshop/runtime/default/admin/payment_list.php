@@ -56,7 +56,7 @@
 <div class="tab">
 <ul class="tab-head">
     <li>正在使用支付</li>
-    <li>全部支付方式</li>
+   <!--  <li>全部支付方式</li> -->
 </ul>
 <div class="tab-body">
     <div>
