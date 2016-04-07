@@ -150,7 +150,7 @@
                                         <?php }?>
                                     </ul>
                                 </div>
-                                <div class="description  clearfix" >
+                                <div class="description  clearfix" style="text-align: center;">
                                     <?php echo isset($goods['content'])?$goods['content']:"";?>
                                 </div>
                             </div>

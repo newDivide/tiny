@@ -209,7 +209,7 @@ h3 {height: 35px; line-height: 35px; text-indent: 10px; color: #333; background:
 .piclist{display: inline-block;}
 .piclist li{float: left;margin: 5px 5px 5px 0;width: 88px;display: block;}
 .piclist li div.bord{padding: 3px; border: 1px solid #d0d0d0; line-height: 0px;}
-.piclist li div.opera { height: 20px;line-height: 20px;text-align:right;padding:0 6px;}
+.piclist li div.opera { height: 20px;line-height: 20px;text-align:center;padding:0 6px;}
 #pic_list li.current .bord{border: 2px dotted #ae0000;padding: 2px;};
 
 /*============独立窗口===========*/

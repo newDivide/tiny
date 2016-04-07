@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo isset($admin_title)?$admin_title:"";?>-TinyShop商城</title>
+<title><?php echo isset($admin_title)?$admin_title:"";?>echo的二手店</title>
 <meta name="author" content="designer:webzhu, date:2012-03-23" />
 <link type="image/x-icon" href="<?php echo urldecode(Url::urlFormat("@favicon.ico"));?>" rel="icon">
 <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("@static/css/base.css"));?>" />
@@ -136,7 +136,7 @@
                   <input type="hidden" name="imgs[]" value="<?php echo isset($item)?$item:"";?>">
                   <img src="<?php echo urldecode(Url::urlFormat("@$item"));?>" data-src=<?php echo isset($item)?$item:"";?> onclick="selectImg(this)" width="80" height="80" alt=""></div>
                 <div class="opera">
-                  <a class="icon-arrow-left-2" href="javascript:;"></a>&nbsp;&nbsp;<a class="icon-arrow-right-2" href="javascript:;"></a>&nbsp;&nbsp;<a class="icon-link" href="javascript:;" onclick="linkImg(this)"></a>&nbsp;&nbsp;<a class="icon-close" href="javascript:;" onclick="delImg(this)"></a>
+                <a class="icon-close" href="javascript:;" onclick="delImg(this)"></a>
                 </div>
               </li>
               <?php }?>

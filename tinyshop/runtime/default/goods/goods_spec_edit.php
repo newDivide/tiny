@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo isset($admin_title)?$admin_title:"";?>-TinyShop商城</title>
+<title><?php echo isset($admin_title)?$admin_title:"";?>echo的二手店</title>
 <meta name="author" content="designer:webzhu, date:2012-03-23" />
 <link type="image/x-icon" href="<?php echo urldecode(Url::urlFormat("@favicon.ico"));?>" rel="icon">
 <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("@static/css/base.css"));?>" />
@@ -71,8 +71,6 @@
       <dd>
         <input name="type" type="radio" checked="checked" value="1">
         <label>文字</label>
-        <input name="type" type="radio" value="2">
-        <label>图片</label>
 
       </dd>
     </dl>
@@ -93,7 +91,7 @@
       <table class="default" id="spec">
         <tr>
           <th>规格值名称</th>
-          <th>规格图片</th>
+          <!-- <th>规格图片</th> -->
           <th>操作</th>
         </tr>
         <?php if(isset($id)){?>
@@ -103,13 +101,13 @@
             <input type="hidden" name="value_id[]" value="<?php echo isset($item['id'])?$item['id']:"";?>">
             <input type="text" name="value[]" value="<?php echo isset($item['name'])?$item['name']:"";?>" pattern="required" />
           </td>
-          <td>
-            <input type="text" name="img[]" readonly="readonly" value="<?php echo isset($item['img'])?$item['img']:"";?>" >
-            <button class="button select_button" value="选择">选择</button>
-          </td>
+         <!--  <td>
+           <input type="text" name="img[]" readonly="readonly" value="<?php echo isset($item['img'])?$item['img']:"";?>" >
+           <button class="button select_button" value="选择">选择</button>
+         </td> -->
           <td class="btn_min">
-            <a href="javascript:;" class="icon-arrow-up-2">上升</a>
-            <a href="javascript:;" class="icon-arrow-down-2">下降</a>
+            <!-- <a href="javascript:;" class="icon-arrow-up-2">上升</a>
+            <a href="javascript:;" class="icon-arrow-down-2">下降</a> -->
             <a href="javascript:;" class="icon-remove-2" >删除</a>
           </td>
         </tr>
@@ -120,13 +118,13 @@
             <input type="hidden" name="value_id[]" value="0">
             <input type="text" name="value[]" pattern="required" />
           </td>
-          <td>
+          <!-- <td>
             <input type="text" name="img[]" readonly="readonly" >
             <button class="button select_button" value="选择">选择</button>
-          </td>
+          </td> -->
           <td class="btn_min">
-            <a href="javascript:;" class="icon-arrow-up-2">上升</a>
-            <a href="javascript:;" class="icon-arrow-down-2">下降</a>
+           <!--  <a href="javascript:;" class="icon-arrow-up-2">上升</a>
+           <a href="javascript:;" class="icon-arrow-down-2">下降</a> -->
             <a href="javascript:;" class="icon-remove-2" >删除</a>
           </td>
         </tr>

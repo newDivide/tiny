@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo isset($admin_title)?$admin_title:"";?>-TinyShop商城</title>
+<title><?php echo isset($admin_title)?$admin_title:"";?>echo的二手店</title>
 <meta name="author" content="designer:webzhu, date:2012-03-23" />
 <link type="image/x-icon" href="<?php echo urldecode(Url::urlFormat("@favicon.ico"));?>" rel="icon">
 <link rel="stylesheet" type="text/css" href="<?php echo urldecode(Url::urlFormat("@static/css/base.css"));?>" />
@@ -93,7 +93,7 @@
           <?php $attr_value_str .= $item['id'].":=:".$item['name'].",";$value_str .= $item['name'].",";?>
           <?php }?>
           <?php $attr_value_str = rtrim($attr_value_str,',');$value_str = rtrim($value_str,',');?>
-          <input type="hidden" name="attr_value[]" value="<?php echo isset($attr_value_str)?$attr_value_str:"";?>" pattern="required" /> <a href="javascript:;" class="edit_button button">编辑</a> <span class="list_value"><?php echo isset($value_str)?$value_str:"";?></span></td> <td class="btn_min"><a href="javascript:;" class="icon-arrow-up-2">上升</a><a href="javascript:;" class="icon-arrow-down-2">下降</a><a href="javascript:;" class="icon-remove-2" >删除</a></td>
+          <input type="hidden" name="attr_value[]" value="<?php echo isset($attr_value_str)?$attr_value_str:"";?>" pattern="required" /> <a href="javascript:;" class="edit_button button">编辑</a> <span class="list_value"><?php echo isset($value_str)?$value_str:"";?></span></td> <td class="btn_min"><a href="javascript:;" class="icon-remove-2" >删除</a></td>
           </tr>
           <?php }?>
           <?php }?>
@@ -122,7 +122,7 @@
               <tr> <td><?php echo isset($item['name'])?$item['name']:"";?><input type="hidden" id="spec_id_<?php echo isset($item['id'])?$item['id']:"";?>" name="spec[id][]" value="<?php echo isset($item['id'])?$item['id']:"";?>"/></td> <td><select class="middle" name="spec[show_type][]">
               <option value="1" <?php if($item['show_type']==1){?> selected="selected" <?php }?>>平铺显示</option>
               <option value="2" <?php if($item['show_type']==2){?> selected="selected" <?php }?>>下拉显示</option>
-              </select></td><td class="btn_min"><a href="javascript:;" class="icon-arrow-up-2">上升</a><a href="javascript:;" class="icon-arrow-down-2">下降</a><a href="javascript:;"  class="icon-remove-2">删除</a></td></tr>
+              </select></td><td class="btn_min"><a href="javascript:;"  class="icon-remove-2">删除</a></td></tr>
               <?php }?>
               <?php }?>
             </table>
