@@ -179,7 +179,7 @@ function setImg(value){
   if($("#pic_list img[src='"+show_src+"']").get(0)){
     art.dialog.alert("图片已经添加，请不要重复添加！");
   }else{
-    $("#pic_list").append('<li> <div class="bord"><input type="hidden" name="imgs[]" value="'+value+'" /> <img src="'+show_src+'" data-src="'+value+'" onclick="selectImg(this)" width="80" height="80" alt=""></div> <div class="opera"><a class="icon-arrow-left-2" href="javascript:;" ></a>&nbsp;&nbsp;<a class="icon-arrow-right-2" href="javascript:;"></a>&nbsp;&nbsp;<a class="icon-link" href="javascript:;" onclick="linkImg(this)"></a>&nbsp;&nbsp;<a class="icon-close" href="javascript:;" onclick="delImg(this)"></a> </div> </li>');
+    $("#pic_list").append('<li> <div class="bord"><input type="hidden" name="imgs[]" value="'+value+'" /> <img src="'+show_src+'" data-src="'+value+'" onclick="selectImg(this)" width="80" height="80" alt=""></div> <div class="opera"><a class="icon-close" href="javascript:;" onclick="delImg(this)"></a> </div> </li>');
       bindEvent();
       if($("#pic_list li.current").length <=0 ){
         $("#pic_list li:eq(0)").addClass("current");

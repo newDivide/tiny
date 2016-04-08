@@ -152,13 +152,13 @@
         <input name="mobile" type="text" empty pattern="mobi" value="<?php echo isset($mobile)?$mobile:"";?>">
         <label></label>
       </dd>
-      </dl><dl class="lineD">
+      </dl><!-- <dl class="lineD">
       <dt>积分：</dt>
       <dd>
         <input name="point" type="text"  class="small"  pattern="int" value="<?php echo isset($point)?$point:0;?>">
         <label></label>
       </dd>
-      </dl>
+      </dl> -->
 
     <div style="text-align:center"><input type="submit" value="提交" class="button">&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="重置" class="button"></div>
     </form>

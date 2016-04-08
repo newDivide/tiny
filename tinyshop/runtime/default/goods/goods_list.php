@@ -101,6 +101,7 @@
 <script type="text/javascript">
     var form =  new Form();
     form.setValue('s_type','<?php echo isset($s_type)?$s_type:"";?>');
+    //筛选条件
     $("#condition").on("click",function(){
         $("body").Condition({input:"#condition_input",okVal:'高级搜索',callback:function(data){tools_submit({action:'<?php echo urldecode(Url::urlFormat("/goods/goods_list"));?>',method:'get'});},data:{name:{name:'商品名称'},store_nums:{name:'库存'},sell_price:{name:'零售价'},goods_no:{name:'产品编号'},'category_id':{name:'商品分类',values:{<?php echo isset($category)?$category:"";?>}},'is_online':{name:'状态',values:{0:'在售',1:'下架'}}
     }});

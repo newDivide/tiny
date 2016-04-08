@@ -153,7 +153,7 @@ form.setValue('parent_id','<?php echo isset($parent_id)?$parent_id:"";?>');
 form.setValue('type','<?php echo isset($type)?$type:"";?>');
 
 $("#addAttrButton").on("click",function(){
-    $("#attr").append('<tr> <td><input type="hidden" name="attr_id[]" value="0" /><input type="text" name="attr_name[]" pattern="required" /></td> <td><select class="middle attr_type"  name="attr_type[]"> <option value="1" selected="">下拉可筛选</option> <option value="2">下拉不可筛选</option> <option value="3">输入不可搜索</option> </select></td><td><input type="hidden" name="attr_value[]" pattern="required" /> <a href="javascript:;" class="edit_button button">编辑</a> <span class="list_value"></span> </td><td class="btn_min"><a href="javascript:;" class="icon-arrow-up-2">上升</a><a href="javascript:;" class="icon-arrow-down-2">下降</a><a href="javascript:;"  class="icon-remove-2">删除</a></td></tr>');
+    $("#attr").append('<tr> <td><input type="hidden" name="attr_id[]" value="0" /><input type="text" name="attr_name[]" pattern="required" /></td> <td><select class="middle attr_type"  name="attr_type[]"> <option value="1" selected="">下拉可筛选</option> <option value="2">下拉不可筛选</option> <option value="3">输入不可搜索</option> </select></td><td><input type="hidden" name="attr_value[]" pattern="required" /> <a href="javascript:;" class="edit_button button">编辑</a> <span class="list_value"></span> </td><td class="btn_min"><a href="javascript:;"  class="icon-remove-2">删除</a></td></tr>');
   bindEvent();
   return false;
 })

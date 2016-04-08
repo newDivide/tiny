@@ -144,9 +144,9 @@ form.setValue('type','<?php echo isset($type)?$type:"";?>');
 
 $("#addSpecButton").on("click",function(){
   if(2==$("input[name='type']:checked").val()){
-    $("#spec").append('<tr> <td><input type="hidden" name="value_id[]" value="0"><input type="text" name="value[]" pattern="required" /></td> <td><input type="text" name="img[]" readonly="readonly" > <button class="button select_button">选择</button></td> <td class="btn_min"><a href="javascript:;" class="icon-arrow-up-2">上升</a><a href="javascript:;" class="icon-arrow-down-2">下降</a><a href="javascript:;"  class="icon-remove-2">删除</a></td></tr>');
+    $("#spec").append('<tr> <td><input type="hidden" name="value_id[]" value="0"><input type="text" name="value[]" pattern="required" /></td>  <td class="btn_min"><a href="javascript:;"  class="icon-remove-2">删除</a></td></tr>');
   }else{
-    $("#spec").append('<tr> <td><input type="hidden" name="value_id[]" value="0"><input type="text" name="value[]" pattern="required" /></td> <td><input type="text" name="img[]" readonly="readonly"  disabled="disabled"> <button class="button select_button" disabled="disabled">选择</button></td> <td class="btn_min"><a href="javascript:;" class="icon-arrow-up-2">上升</a><a href="javascript:;" class="icon-arrow-down-2">下降</a><a href="javascript:;"  class="icon-remove-2">删除</a></td></tr>');
+    $("#spec").append('<tr> <td><input type="hidden" name="value_id[]" value="0"><input type="text" name="value[]" pattern="required" /></td>  <td class="btn_min"><a href="javascript:;"  class="icon-remove-2">删除</a></td></tr>');
   }
   bindEvent();
   return false;

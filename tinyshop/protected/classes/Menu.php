@@ -1,3 +1,4 @@
+
 <?php
 //系统菜单类
 class Menu
@@ -14,28 +15,42 @@ class Menu
     {
         $nodes= array(
         '/admin/index'=>array('name'=>'管理首页','parent'=>'config'),
+       /* '/admin/theme_list'=>array('name'=>'主题设置','parent'=>'config'),
+        '/admin/config_globals'=>array('name'=>'站点设置','parent'=>'config'),
+        '/admin/config_other'=>array('name'=>'其它配置','parent'=>'config'),
+        '/admin/config_email'=>array('name'=>'邮箱配置','parent'=>'config'),
+        '/admin/msg_template_list'=>array('name'=>'信息模板','parent'=>'config'),
+        '/admin/msg_template_edit'=>array('name'=>'信息模板编辑','parent'=>'config'),
+        '/admin/notice_template_list'=>array('name'=>'提醒管理','parent'=>'config'),
+        '/admin/notice_template_edit'=>array('name'=>'提醒编辑','parent'=>'config'),
         '/admin/oauth_list'=>array('name'=>'开放登录','parent'=>'third'),
         '/admin/oauth_edit'=>array('name'=>'开放登录编辑','parent'=>'third'),
         '/admin/class_config_list'=>array('name'=>'第三方列表','parent'=>'third'),
-        '/admin/class_config_edit'=>array('name'=>'第三方配制编辑','parent'=>'third'),
+        '/admin/class_config_edit'=>array('name'=>'第三方配制编辑','parent'=>'third'),*/
 
         '/admin/payment_list'=>array('name'=>'支付方式','parent'=>'delivery'),
         '/admin/payment_edit'=>array('name'=>'编辑支付方式','parent'=>'delivery'),
+       /* '/admin/zoning_list'=>array('name'=>'区域划分','parent'=>'delivery'),
+        '/admin/area_list'=>array('name'=>'地区管理','parent'=>'delivery'),
+        '/admin/fare_list'=>array('name'=>'运费模板','parent'=>'delivery'),
+        '/admin/fare_edit'=>array('name'=>'运费模板编辑','parent'=>'delivery'),
+        '/admin/express_company_list'=>array('name'=>'快递公司','parent'=>'delivery'),
+        '/admin/express_company_edit'=>array('name'=>'快递公司编辑','parent'=>'delivery'),*/
 
         '/admin/manager_list'=>array('name'=>'管理员','parent'=>'safe'),
+        '/admin/manager_edit'=>array('name'=>'编辑管理员','parent'=>'safe'),
+       /* '/admin/roles_list'=>array('name'=>'角色管理','parent'=>'safe'),
+        '/admin/roles_edit'=>array('name'=>'角色编辑','parent'=>'safe'),
+        '/admin/resources_list'=>array('name'=>'权限列表','parent'=>'safe'),
+        '/admin/resources_edit'=>array('name'=>'编辑权限资源','parent'=>'safe'),
+        '/admin/log_operation_list'=>array('name'=>'操作日志','parent'=>'safe'),
+        '/admin/update'=>array('name'=>'版本升级','parent'=>'safe'),
+        '/admin/clear'=>array('name'=>'清除缓存','parent'=>'safe'),*/
 
-        '/content/article_list'=>array('name'=>'全部文章','parent'=>'article'),
-        '/content/article_edit'=>array('name'=>'文章编辑','parent'=>'article'),
-        '/content/category_list'=>array('name'=>'分类管理','parent'=>'article'),
-        '/content/category_edit'=>array('name'=>'编辑分类','parent'=>'article'),
-        '/content/help_list'=>array('name'=>'全部帮助','parent'=>'help'),
-        '/content/help_edit'=>array('name'=>'帮助编辑','parent'=>'help'),
-        '/content/help_category_list'=>array('name'=>'帮助分类管理','parent'=>'help'),
-        '/content/help_category_edit'=>array('name'=>'编辑帮助分类','parent'=>'help'),
-        '/content/ad_list'=>array('name'=>'广告管理','parent'=>'banner'),
-        '/content/ad_edit'=>array('name'=>'编辑广告','parent'=>'banner'),
         '/content/nav_list'=>array('name'=>'导航管理','parent'=>'banner'),
         '/content/nav_edit'=>array('name'=>'导航管理','parent'=>'banner'),
+      
+       
 
 
         '/admin/tables_list'=>array('name'=>'数据库备份','parent'=>'database'),
@@ -48,12 +63,19 @@ class Menu
         '/goods/goods_type_edit'=>array('name'=>'类型编辑','parent'=>'goods_config'),
         '/goods/goods_spec_list'=>array('name'=>'规格管理','parent'=>'goods_config'),
         '/goods/goods_spec_edit'=>array('name'=>'规格编辑','parent'=>'goods_config'),
+        '/goods/brand_list'=>array('name'=>'品牌管理','parent'=>'goods_config'),
+        '/goods/brand_edit'=>array('name'=>'品牌编辑','parent'=>'goods_config'),
         '/goods/goods_list'=>array('name'=>'商品管理','parent'=>'goods'),
         '/goods/goods_edit'=>array('name'=>'商品编辑','parent'=>'goods'),
 
         '/customer/customer_list'=>array('name'=>'会员管理','parent'=>'customer'),
         '/customer/customer_edit'=>array('name'=>'添加会员','parent'=>'customer'),
+        '/customer/grade_edit'=>array('name'=>'添加会员等级','parent'=>'customer'),
+        '/customer/withdraw_list'=>array('name'=>'提现申请','parent'=>'balance'),
+        '/customer/balance_list'=>array('name'=>'资金日志','parent'=>'balance'),
         '/customer/review_list'=>array('name'=>'商品评价','parent'=>'ask_reviews'),
+        
+        
         '/order/order_list'=>array('name'=>'商品订单','parent'=>'order'),
         '/order/express_template_list'=>array('name'=>'快递单模板','parent'=>'express'),
         '/order/express_template_edit'=>array('name'=>'快递单模板编辑','parent'=>'express'),
@@ -89,16 +111,20 @@ class Menu
         //分组菜单
         $subMenu = array(
         'config'=>array('name'=>'参数设定','parent'=>'system'),
+        /*'third'=>array('name'=>'第三方整合','parent'=>'system'),*/
         'delivery'=>array('name'=>'支付与配送','parent'=>'system'),
         'safe'=>array('name'=>'安全管理','parent'=>'system'),
-       
+        /*'database'=>array('name'=>'数据库管理','parent'=>'system'),*/
+
         'banner'=>array('name'=>'内容管理','parent'=>'content'),
         'goods'=>array('name'=>'产品管理','parent'=>'goods'),
         'goods_config'=>array('name'=>'商品配置','parent'=>'goods'),
         'customer'=>array('name'=>'会员管理','parent'=>'customer'),
+        /*'balance'=>array('name'=>'会员资金','parent'=>'customer'),*/
         'ask_reviews'=>array('name'=>'咨询与评价','parent'=>'customer'),
         'order'=>array('name'=>'订单管理','parent'=>'order'),
         'receipt'=>array('name'=>'单据管理','parent'=>'order'),
+        /*'express'=>array('name'=>'快递单配置','parent'=>'order'),*/
         'count'=>array('name'=>'销售统计','parent'=>'count'),
         'customer_count'=>array('name'=>'客户统计','parent'=>'count'),
         'promotions'=>array('name'=>'促销活动','parent'=>'marketing'),
@@ -111,6 +137,9 @@ class Menu
         'goods'=>array('link'=>'/goods/goods_list','name'=>'商品中心'),
         'order'=>array('link'=>'/order/order_list','name'=>'订单中心'),
         'customer'=>array('link'=>'/customer/customer_list','name'=>'客户中心'),
+      /*  'marketing'=>array('link'=>'/marketing/prom_goods_list','name'=>'营销推广'),
+        'count'=>array('link'=>'/count/index','name'=>'统计报表'),*/
+        'content'=>array('link'=>'/content/nav_list','name'=>'内容管理'),
         'system'=>array('link'=>'/admin/index','name'=>'系统设置'),
         );
 
